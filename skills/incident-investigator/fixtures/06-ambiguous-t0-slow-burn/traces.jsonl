@@ -1,0 +1,4 @@
+{"t": "2026-04-19T09:18:00Z", "trace_id": "tr-base-01", "request_id": "req-base-01", "spans": [{"service": "api-gateway", "duration_ms": 4}, {"service": "recommendations-api", "duration_ms": 72}], "outcome": "success", "retries": 0}
+{"t": "2026-04-19T10:30:00Z", "trace_id": "tr-mid-02", "request_id": "req-mid-02", "spans": [{"service": "api-gateway", "duration_ms": 5}, {"service": "recommendations-api", "duration_ms": 148}], "outcome": "success", "retries": 0}
+{"t": "2026-04-19T11:45:00Z", "trace_id": "tr-late-03", "request_id": "req-late-03", "spans": [{"service": "api-gateway", "duration_ms": 4}, {"service": "recommendations-api", "duration_ms": 248}], "outcome": "success", "retries": 0}
+{"t": "2026-04-19T12:10:00Z", "trace_id": "tr-tail-04", "request_id": "req-tail-04", "spans": [{"service": "api-gateway", "duration_ms": 5}, {"service": "recommendations-api", "duration_ms": 314}], "outcome": "success", "retries": 0}

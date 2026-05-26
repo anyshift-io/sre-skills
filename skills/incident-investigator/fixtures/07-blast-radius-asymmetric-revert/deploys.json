@@ -1,0 +1,27 @@
+{
+  "service": "notifications-svc",
+  "deploys": [
+    {
+      "service": "notifications-svc",
+      "version": "v8.11.4",
+      "commit": "3a1c059",
+      "deployed_at": "2026-05-26T09:48:11Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "Bump observability SDK minor version.",
+      "bundle_size": 1
+    },
+    {
+      "service": "notifications-svc",
+      "version": "v8.12.0",
+      "commit": "8b3f4d1",
+      "deployed_at": "2026-06-02T09:48:23Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "Weekly release train: (1) Twilio SMS API v2 migration in internal/sms/twilio.go, (2) email template refactor, (3) push notification batching optimization, (4) removal of deprecated SES region fallback, (5) new /healthz endpoint, (6) express 4.x -> 5.x upgrade.",
+      "bundle_size": 6
+    }
+  ],
+  "infra_changes": [],
+  "iam_changes": [],
+  "feature_flags": [],
+  "scheduled_jobs": []
+}

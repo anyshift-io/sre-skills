@@ -1,0 +1,6 @@
+{"t": "2026-04-19T09:32:14Z", "level": "WARN", "service": "recommendations-api", "msg": "GC pause exceeded soft threshold", "gc_pause_ms": 47}
+{"t": "2026-04-19T10:11:08Z", "level": "WARN", "service": "recommendations-api", "msg": "GC pause exceeded soft threshold", "gc_pause_ms": 62}
+{"t": "2026-04-19T10:48:42Z", "level": "WARN", "service": "recommendations-api", "msg": "GC pause exceeded soft threshold", "gc_pause_ms": 101}
+{"t": "2026-04-19T11:24:18Z", "level": "WARN", "service": "recommendations-api", "msg": "GC pause exceeded soft threshold", "gc_pause_ms": 138}
+{"t": "2026-04-19T11:58:55Z", "level": "WARN", "service": "recommendations-api", "msg": "GC pause exceeded soft threshold", "gc_pause_ms": 162}
+{"t": "2026-04-19T12:12:30Z", "level": "WARN", "service": "recommendations-api", "msg": "GC pause exceeded soft threshold", "gc_pause_ms": 178}

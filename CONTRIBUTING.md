@@ -8,8 +8,7 @@ Every skill in this repo ships with:
 
 1. **Two worked examples.** Real incidents, canonical scenarios, or both. Show the methodology in motion, not just described.
 2. **Fixture-based replay tests.** The skill must be runnable end-to-end against committed fixtures, with no external credentials. If your skill calls an API, the fixtures stand in for the API in tests.
-3. **A 60 to 120 second screen recording.** Show the skill working. Hosted in the skill directory or linked from the README.
-4. **An explicit failure-modes section.** Where is this skill wrong? Where should an agent escalate to a human? List the failure modes honestly.
+3. **An explicit failure-modes section.** Where is this skill wrong? Where should an agent escalate to a human? List the failure modes honestly.
 
 Skills that don't meet this bar stay in PR until they do.
 
@@ -23,13 +22,11 @@ This is non-negotiable. A skill that only works with Anyshift loaded belongs in 
 
 The canonical layout is established by `skills/incident-investigator/` (the reference template). Mirror that structure for new skills.
 
-The reference template is shipping by end of May 2026. Until then, open a discussion if you want to start a new skill and we'll coordinate on layout.
-
 ## How to add a new skill
 
 1. Fork the repo.
 2. Create `skills/<skill-name>/` mirroring the reference template.
-3. Open a PR. Reviewers check: vendor-neutral runnability, the four quality-bar items above, and methodology soundness.
+3. Open a PR. Reviewers check: vendor-neutral runnability, the three quality-bar items above, and methodology soundness.
 
 ## What goes outside this repo
 

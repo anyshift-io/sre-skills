@@ -1,0 +1,13 @@
+{
+  "service": "checkout-api",
+  "memory_limit_bytes": 536870912,
+  "samples": [
+    {"t": "2026-02-15T13:10:00Z", "rss_bytes_p95": 146800640, "error_rate_pct": 0.3, "request_rate_rps": 312, "gateway_retry_rate_rps": 3},
+    {"t": "2026-02-15T13:13:00Z", "rss_bytes_p95": 147324928, "error_rate_pct": 0.4, "request_rate_rps": 314, "gateway_retry_rate_rps": 3},
+    {"t": "2026-02-15T13:16:00Z", "rss_bytes_p95": 147587072, "error_rate_pct": 0.9, "request_rate_rps": 311, "gateway_retry_rate_rps": 4},
+    {"t": "2026-02-15T13:20:00Z", "rss_bytes_p95": 148111360, "error_rate_pct": 2.1, "request_rate_rps": 309, "gateway_retry_rate_rps": 4},
+    {"t": "2026-02-15T13:25:00Z", "rss_bytes_p95": 148373504, "error_rate_pct": 4.8, "request_rate_rps": 308, "gateway_retry_rate_rps": 5},
+    {"t": "2026-02-15T13:28:00Z", "rss_bytes_p95": 148635648, "error_rate_pct": 6.1, "request_rate_rps": 310, "gateway_retry_rate_rps": 5},
+    {"t": "2026-02-15T13:30:00Z", "rss_bytes_p95": 148897792, "error_rate_pct": 6.4, "request_rate_rps": 312, "gateway_retry_rate_rps": 5}
+  ]
+}

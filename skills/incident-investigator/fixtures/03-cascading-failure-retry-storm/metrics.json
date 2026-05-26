@@ -1,0 +1,14 @@
+{
+  "service": "payments-api",
+  "memory_limit_bytes": 536870912,
+  "samples": [
+    {"t": "2026-03-20T10:53:00Z", "rss_bytes_p95": 219152384, "error_rate_pct": 0.2, "request_rate_rps": 384, "gateway_retry_rate_rps": 6, "upstream_latency_p99_ms": 52, "payments_api_latency_p99_ms": 118},
+    {"t": "2026-03-20T10:58:00Z", "rss_bytes_p95": 219676672, "error_rate_pct": 0.4, "request_rate_rps": 388, "gateway_retry_rate_rps": 7, "upstream_latency_p99_ms": 121, "payments_api_latency_p99_ms": 184},
+    {"t": "2026-03-20T11:00:00Z", "rss_bytes_p95": 219676672, "error_rate_pct": 0.4, "request_rate_rps": 391, "gateway_retry_rate_rps": 7, "upstream_latency_p99_ms": 482, "payments_api_latency_p99_ms": 546},
+    {"t": "2026-03-20T11:03:00Z", "rss_bytes_p95": 219938816, "error_rate_pct": 1.2, "request_rate_rps": 394, "gateway_retry_rate_rps": 14, "upstream_latency_p99_ms": 588, "payments_api_latency_p99_ms": 712},
+    {"t": "2026-03-20T11:05:00Z", "rss_bytes_p95": 220200960, "error_rate_pct": 2.9, "request_rate_rps": 401, "gateway_retry_rate_rps": 22, "upstream_latency_p99_ms": 604, "payments_api_latency_p99_ms": 884},
+    {"t": "2026-03-20T11:08:00Z", "rss_bytes_p95": 220463104, "error_rate_pct": 7.4, "request_rate_rps": 419, "gateway_retry_rate_rps": 48, "upstream_latency_p99_ms": 624, "payments_api_latency_p99_ms": 1172},
+    {"t": "2026-03-20T11:11:00Z", "rss_bytes_p95": 220725248, "error_rate_pct": 11.8, "request_rate_rps": 442, "gateway_retry_rate_rps": 71, "upstream_latency_p99_ms": 638, "payments_api_latency_p99_ms": 1418},
+    {"t": "2026-03-20T11:15:00Z", "rss_bytes_p95": 220987392, "error_rate_pct": 12.4, "request_rate_rps": 451, "gateway_retry_rate_rps": 74, "upstream_latency_p99_ms": 641, "payments_api_latency_p99_ms": 1488}
+  ]
+}

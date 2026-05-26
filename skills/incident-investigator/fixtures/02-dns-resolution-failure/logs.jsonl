@@ -1,0 +1,12 @@
+{"t": "2026-04-08T09:34:11Z", "level": "ERROR", "service": "inventory-svc", "msg": "upstream resolution failed: SERVFAIL for catalog-svc.internal", "upstream": "catalog-svc.internal", "request_id": "req-a1"}
+{"t": "2026-04-08T09:34:42Z", "level": "ERROR", "service": "inventory-svc", "msg": "upstream resolution failed: SERVFAIL for catalog-svc.internal", "upstream": "catalog-svc.internal", "request_id": "req-a2"}
+{"t": "2026-04-08T09:35:18Z", "level": "ERROR", "service": "inventory-svc", "msg": "dial tcp: lookup catalog-svc.internal: getaddrinfo: Name or service not known", "upstream": "catalog-svc.internal", "request_id": "req-a3"}
+{"t": "2026-04-08T09:36:02Z", "level": "ERROR", "service": "inventory-svc", "msg": "upstream resolution failed: SERVFAIL for catalog-svc.internal", "upstream": "catalog-svc.internal", "request_id": "req-a4"}
+{"t": "2026-04-08T09:36:48Z", "level": "ERROR", "service": "inventory-svc", "msg": "dial tcp: lookup catalog-svc.internal: getaddrinfo: Name or service not known", "upstream": "catalog-svc.internal", "request_id": "req-a5"}
+{"t": "2026-04-08T09:38:10Z", "level": "ERROR", "service": "payments-api", "msg": "upstream resolution failed: SERVFAIL for ledger-svc.internal", "upstream": "ledger-svc.internal", "request_id": "req-p1"}
+{"t": "2026-04-08T09:39:55Z", "level": "ERROR", "service": "inventory-svc", "msg": "upstream resolution failed: SERVFAIL for catalog-svc.internal", "upstream": "catalog-svc.internal", "request_id": "req-a6"}
+{"t": "2026-04-08T09:42:33Z", "level": "ERROR", "service": "payments-api", "msg": "dial tcp: lookup ledger-svc.internal: getaddrinfo: Name or service not known", "upstream": "ledger-svc.internal", "request_id": "req-p2"}
+{"t": "2026-04-08T09:45:21Z", "level": "ERROR", "service": "inventory-svc", "msg": "upstream resolution failed: SERVFAIL for catalog-svc.internal", "upstream": "catalog-svc.internal", "request_id": "req-a7"}
+{"t": "2026-04-08T09:47:00Z", "level": "ERROR", "service": "inventory-svc", "msg": "upstream resolution failed: SERVFAIL for catalog-svc.internal", "upstream": "catalog-svc.internal", "request_id": "req-a8"}
+{"t": "2026-04-08T09:48:14Z", "level": "INFO", "service": "inventory-svc", "msg": "outbound call ok", "upstream": "api.stripe.com", "request_id": "req-ok1"}
+{"t": "2026-04-08T09:49:30Z", "level": "ERROR", "service": "inventory-svc", "msg": "upstream resolution failed: SERVFAIL for catalog-svc.internal", "upstream": "catalog-svc.internal", "request_id": "req-a9"}
