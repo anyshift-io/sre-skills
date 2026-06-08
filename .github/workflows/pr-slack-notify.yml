@@ -1,3 +1,14 @@
+# Self-contained PR review Slack notifier for PUBLIC repos.
+#
+# Public repositories cannot call the reusable workflow in the private
+# custom_github_actions repo (GitHub blocks public -> private Actions access
+# regardless of the private repo's access policy), so pr-slack-notify.yml
+# startup-fails on public repos. This file inlines the same logic instead.
+# Keep it in sync with custom_github_actions/.github/workflows/slack-pr-reviewer-notify.yml.
+#
+# The pull_request trigger (not pull_request_target) means fork PRs run without
+# secrets, so the NOTIFIER_* secrets are never exposed to untrusted code; on a
+# fork PR the script simply finds an empty token and exits 0 without notifying.
 name: PR Review Notifications
 
 on:
@@ -7,7 +18,117 @@ on:
 permissions:
   contents: read
 
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.NOTIFIER_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.NOTIFIER_SECRET_ACCESS_KEY }}
+
 jobs:
-  call-slack-notifier:
-    uses: anyshift-io/custom_github_actions/.github/workflows/slack-pr-reviewer-notify.yml@main
-    secrets: inherit
+  notify:
+    runs-on: ubuntu-latest
+    name: PR Review Slack Notify
+    steps:
+      - name: Send slack notifications to requested reviewers
+        env:
+          NOTIFIER_SLACK_BOT_TOKEN: ${{ secrets.NOTIFIER_SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: "C0B1FJTN6M8"
+          AWS_REGION: "us-east-1"
+          S3_BUCKET: "as-github-slack-mapping"
+          S3_OBJECT_KEY: "github_to_slack_mapper.json"
+        run: |
+          #!/bin/bash
+          # Always exit successfully to avoid failing PRs
+
+          # GitHub event data
+          GITHUB_EVENT_PATH="${GITHUB_EVENT_PATH}"
+          GITHUB_REPOSITORY="${GITHUB_REPOSITORY}"
+          SLACK_BOT_TOKEN="${NOTIFIER_SLACK_BOT_TOKEN}"
+          SLACK_CHANNEL_ID="${SLACK_CHANNEL_ID:-C0B1FJTN6M8}"
+
+          # AWS S3 config
+          AWS_REGION="${AWS_REGION:-us-east-1}"
+          S3_BUCKET="${S3_BUCKET:-as-github-slack-mapping}"
+          S3_OBJECT_KEY="${S3_OBJECT_KEY:-github_to_slack_mapper.json}"
+
+          # Check required env vars
+          if [ -z "$SLACK_BOT_TOKEN" ]; then
+            echo "Warning: NOTIFIER_SLACK_BOT_TOKEN is not set - skipping notification"
+            exit 0
+          fi
+
+          if [ -z "$GITHUB_EVENT_PATH" ]; then
+            echo "Warning: GITHUB_EVENT_PATH is not set - skipping notification"
+            exit 0
+          fi
+
+          # Download S3 mapping file
+          echo "Downloading GitHub to Slack mapping..."
+          MAPPING_FILE="/tmp/github_slack_mapping.json"
+          if ! aws s3 cp "s3://${S3_BUCKET}/${S3_OBJECT_KEY}" "$MAPPING_FILE" --region "$AWS_REGION" 2>/dev/null; then
+            echo "Warning: Failed to download S3 mapping file - skipping notification"
+            exit 0
+          fi
+
+          # Parse PR event data
+          PR_TITLE=$(jq -r '.pull_request.title' "$GITHUB_EVENT_PATH")
+          PR_URL=$(jq -r '.pull_request.html_url' "$GITHUB_EVENT_PATH")
+          PR_NUMBER=$(jq -r '.pull_request.number' "$GITHUB_EVENT_PATH")
+          REQUESTED_REVIEWER=$(jq -r '.requested_reviewer.login // empty' "$GITHUB_EVENT_PATH")
+          PR_CREATOR=$(jq -r '.pull_request.user.login // empty' "$GITHUB_EVENT_PATH")
+
+          # Get repository name (without owner)
+          REPO_NAME=$(echo "$GITHUB_REPOSITORY" | cut -d'/' -f2)
+
+          # Check if we have a reviewer
+          if [ -z "$REQUESTED_REVIEWER" ]; then
+            echo "No reviewer found in event data"
+            exit 0
+          fi
+
+          echo "Processing review request for: $REQUESTED_REVIEWER"
+
+          # Look up reviewer's Slack ID (required)
+          REVIEWER_SLACK_ID=$(jq -r ".engineers[] | select(.github_username == \"$REQUESTED_REVIEWER\") | .slack_id // empty" "$MAPPING_FILE")
+
+          if [ -z "$REVIEWER_SLACK_ID" ]; then
+            echo "No Slack mapping found for GitHub user: $REQUESTED_REVIEWER"
+            exit 0
+          fi
+
+          echo "Found reviewer Slack ID: $REVIEWER_SLACK_ID"
+
+          # Look up creator's Slack ID (optional - fallback to GitHub handle)
+          CREATOR_SLACK_ID=$(jq -r ".engineers[] | select(.github_username == \"$PR_CREATOR\") | .slack_id // empty" "$MAPPING_FILE")
+
+          if [ -n "$CREATOR_SLACK_ID" ]; then
+            CREATOR_MENTION="<@${CREATOR_SLACK_ID}>"
+            echo "Found creator Slack ID: $CREATOR_SLACK_ID"
+          else
+            CREATOR_MENTION="@${PR_CREATOR}"
+            echo "Using GitHub handle for creator: $PR_CREATOR"
+          fi
+
+          # Construct Slack message with hyperlinked PR title
+          MESSAGE="<@${REVIEWER_SLACK_ID}> ${CREATOR_MENTION} is requesting a review for their PR <${PR_URL}|${PR_TITLE}> in *${REPO_NAME}*"
+
+          # Build JSON payload using jq to properly escape everything
+          JSON_PAYLOAD=$(jq -n \
+            --arg channel "$SLACK_CHANNEL_ID" \
+            --arg text "$MESSAGE" \
+            '{channel: $channel, text: $text, unfurl_links: false, unfurl_media: false}')
+
+          # Send Slack message
+          echo "Sending Slack notification..."
+          RESPONSE=$(curl -s -X POST "https://slack.com/api/chat.postMessage" \
+            -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "$JSON_PAYLOAD")
+
+          # Check if message was sent successfully
+          OK=$(echo "$RESPONSE" | jq -r '.ok')
+          if [ "$OK" != "true" ]; then
+            ERROR=$(echo "$RESPONSE" | jq -r '.error // "Unknown error"')
+            echo "Warning: Failed to send Slack message: $ERROR"
+            exit 0
+          fi
+
+          echo "Slack notification sent successfully!"
