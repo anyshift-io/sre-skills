@@ -26,6 +26,19 @@ Start with [`incident-investigator`](./skills/incident-investigator/): it is the
 
 ## Using a skill
 
+### Claude Code (recommended)
+
+These skills ship as a plugin in Anyshift's [Claude Code](https://claude.com/claude-code) marketplace. In a Claude Code session:
+
+```
+/plugin marketplace add anyshift-io/claude-plugins
+/plugin install sre-skills@anyshift
+```
+
+The skills are now loaded. The agent reaches for the right one whenever you ask something that maps to an incident, a change review, an oncall handover, a postmortem, or a reliability audit. Pull new skills and versions later with `/plugin marketplace update anyshift`.
+
+### Any other agent
+
 Clone the repo and point your agent at the skill you want. Each skill directory is self-contained: the methodology, the worked examples, and the fixture-based replay tests live together, so you can run the skill against the fixtures before pointing it at your own infrastructure.
 
 ```sh
