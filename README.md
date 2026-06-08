@@ -20,11 +20,11 @@ Three layers, in order of integration depth:
 
 | Skill | Status | What it does |
 |---|---|---|
-| `incident-investigator` | *Shipping by end of May 2026* | Investigates a live incident: correlates deploys, traces, logs, recent IAM changes. Covers OOM, DNS, cascading-failure, deploy-correlator paths. |
-| `change-impact-analyzer` | *Shipping by end of May 2026* | Pre-flight checks: IAM blast radius, drift detection, what this PR breaks. |
-| `oncall-handover` | *Shipping by end of May 2026* | Reviews cert expiry, deploy state, SLO burn during oncall handover. |
-| `postmortem-author` | *Shipping by end of May 2026* | Timeline reconstruction, contributing factors, impact quantification. |
-| `reliability-auditor` | *Shipping by end of May 2026* | Production-readiness audit. |
+| `incident-investigator` | *In progress* | Investigates a live incident: correlates deploys, traces, logs, recent IAM changes. Covers OOM, DNS, cascading-failure, deploy-correlator paths. |
+| `change-impact-analyzer` | *In progress* | Pre-flight checks: IAM blast radius, drift detection, what this PR breaks. |
+| `oncall-handover` | *In progress* | Reviews cert expiry, deploy state, SLO burn during oncall handover. |
+| `postmortem-author` | *In progress* | Timeline reconstruction, contributing factors, impact quantification. |
+| `reliability-auditor` | *In progress* | Production-readiness audit. |
 
 ## Quality bar
 
