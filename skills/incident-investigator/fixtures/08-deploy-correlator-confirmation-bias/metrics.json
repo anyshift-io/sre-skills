@@ -1,0 +1,13 @@
+{
+  "service": "users-api",
+  "memory_limit_bytes": 536870912,
+  "samples": [
+    {"t": "2026-07-11T14:18:00Z", "rss_bytes_p95": 161480704, "error_rate_pct": 0.2, "request_rate_rps": 215, "gateway_retry_rate_rps": 2, "auth_failure_count_rps": 0.0},
+    {"t": "2026-07-11T14:22:00Z", "rss_bytes_p95": 161742848, "error_rate_pct": 0.3, "request_rate_rps": 217, "gateway_retry_rate_rps": 2, "auth_failure_count_rps": 0.0},
+    {"t": "2026-07-11T14:26:00Z", "rss_bytes_p95": 162004992, "error_rate_pct": 0.6, "request_rate_rps": 218, "gateway_retry_rate_rps": 2, "auth_failure_count_rps": 1.4},
+    {"t": "2026-07-11T14:29:00Z", "rss_bytes_p95": 162267136, "error_rate_pct": 1.7, "request_rate_rps": 220, "gateway_retry_rate_rps": 3, "auth_failure_count_rps": 4.1},
+    {"t": "2026-07-11T14:33:00Z", "rss_bytes_p95": 162529280, "error_rate_pct": 2.4, "request_rate_rps": 221, "gateway_retry_rate_rps": 3, "auth_failure_count_rps": 6.2},
+    {"t": "2026-07-11T14:36:00Z", "rss_bytes_p95": 162791424, "error_rate_pct": 3.1, "request_rate_rps": 223, "gateway_retry_rate_rps": 3, "auth_failure_count_rps": 7.4},
+    {"t": "2026-07-11T14:38:00Z", "rss_bytes_p95": 163053568, "error_rate_pct": 3.4, "request_rate_rps": 224, "gateway_retry_rate_rps": 3, "auth_failure_count_rps": 7.8}
+  ]
+}

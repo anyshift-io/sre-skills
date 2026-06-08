@@ -1,0 +1,13 @@
+{
+  "service": "payments-api",
+  "memory_limit_bytes": 536870912,
+  "samples": [
+    {"t": "2026-05-04T16:29:00Z", "rss_bytes_p95": 197132288, "error_rate_pct": 0.3, "request_rate_rps": 264, "gateway_retry_rate_rps": 3, "dns_resolver_errors_rps": 0.0},
+    {"t": "2026-05-04T16:35:00Z", "rss_bytes_p95": 197394432, "error_rate_pct": 0.4, "request_rate_rps": 268, "gateway_retry_rate_rps": 3, "dns_resolver_errors_rps": 0.0},
+    {"t": "2026-05-04T16:38:00Z", "rss_bytes_p95": 197656576, "error_rate_pct": 0.6, "request_rate_rps": 271, "gateway_retry_rate_rps": 4, "dns_resolver_errors_rps": 0.0},
+    {"t": "2026-05-04T16:41:00Z", "rss_bytes_p95": 197918720, "error_rate_pct": 1.2, "request_rate_rps": 274, "gateway_retry_rate_rps": 5, "dns_resolver_errors_rps": 0.0},
+    {"t": "2026-05-04T16:44:00Z", "rss_bytes_p95": 198180864, "error_rate_pct": 2.4, "request_rate_rps": 277, "gateway_retry_rate_rps": 5, "dns_resolver_errors_rps": 0.0},
+    {"t": "2026-05-04T16:47:00Z", "rss_bytes_p95": 198443008, "error_rate_pct": 3.7, "request_rate_rps": 281, "gateway_retry_rate_rps": 6, "dns_resolver_errors_rps": 0.0},
+    {"t": "2026-05-04T16:50:00Z", "rss_bytes_p95": 198705152, "error_rate_pct": 4.2, "request_rate_rps": 283, "gateway_retry_rate_rps": 6, "dns_resolver_errors_rps": 0.0}
+  ]
+}

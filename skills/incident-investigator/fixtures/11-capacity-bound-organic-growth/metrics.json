@@ -1,0 +1,13 @@
+{
+  "service": "search-svc",
+  "memory_limit_bytes": 536870912,
+  "samples": [
+    {"t": "2026-10-08T10:40:00Z", "rss_bytes_p95": 304087040, "error_rate_pct": 0.3, "request_rate_rps": 412, "gateway_retry_rate_rps": 3, "queue_depth_p99": 12},
+    {"t": "2026-10-08T10:45:00Z", "rss_bytes_p95": 304349184, "error_rate_pct": 0.4, "request_rate_rps": 521, "gateway_retry_rate_rps": 3, "queue_depth_p99": 38},
+    {"t": "2026-10-08T10:48:00Z", "rss_bytes_p95": 304611328, "error_rate_pct": 0.9, "request_rate_rps": 614, "gateway_retry_rate_rps": 3, "queue_depth_p99": 72},
+    {"t": "2026-10-08T10:51:00Z", "rss_bytes_p95": 304873472, "error_rate_pct": 1.8, "request_rate_rps": 658, "gateway_retry_rate_rps": 4, "queue_depth_p99": 118},
+    {"t": "2026-10-08T10:55:00Z", "rss_bytes_p95": 305135616, "error_rate_pct": 3.4, "request_rate_rps": 692, "gateway_retry_rate_rps": 4, "queue_depth_p99": 154},
+    {"t": "2026-10-08T11:00:00Z", "rss_bytes_p95": 305397760, "error_rate_pct": 4.1, "request_rate_rps": 704, "gateway_retry_rate_rps": 4, "queue_depth_p99": 172},
+    {"t": "2026-10-08T11:05:00Z", "rss_bytes_p95": 305659904, "error_rate_pct": 4.6, "request_rate_rps": 718, "gateway_retry_rate_rps": 4, "queue_depth_p99": 184}
+  ]
+}

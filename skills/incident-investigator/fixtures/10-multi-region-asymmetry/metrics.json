@@ -1,0 +1,18 @@
+{
+  "service": "image-svc",
+  "memory_limit_bytes": 536870912,
+  "samples": [
+    {"t": "2026-09-14T11:27:00Z", "region": "us-east-1", "rss_bytes_p95": 192937984, "error_rate_pct": 0.4, "request_rate_rps": 318, "gateway_retry_rate_rps": 4},
+    {"t": "2026-09-14T11:27:00Z", "region": "us-west-2", "rss_bytes_p95": 193462272, "error_rate_pct": 0.3, "request_rate_rps": 214, "gateway_retry_rate_rps": 2},
+    {"t": "2026-09-14T11:32:00Z", "region": "us-east-1", "rss_bytes_p95": 193200128, "error_rate_pct": 7.4, "request_rate_rps": 319, "gateway_retry_rate_rps": 4},
+    {"t": "2026-09-14T11:32:00Z", "region": "us-west-2", "rss_bytes_p95": 193724416, "error_rate_pct": 0.3, "request_rate_rps": 215, "gateway_retry_rate_rps": 2},
+    {"t": "2026-09-14T11:38:00Z", "region": "us-east-1", "rss_bytes_p95": 193462272, "error_rate_pct": 18.2, "request_rate_rps": 321, "gateway_retry_rate_rps": 5},
+    {"t": "2026-09-14T11:38:00Z", "region": "us-west-2", "rss_bytes_p95": 193986560, "error_rate_pct": 0.4, "request_rate_rps": 216, "gateway_retry_rate_rps": 2},
+    {"t": "2026-09-14T11:42:00Z", "region": "us-east-1", "rss_bytes_p95": 193724416, "error_rate_pct": 22.8, "request_rate_rps": 322, "gateway_retry_rate_rps": 5},
+    {"t": "2026-09-14T11:42:00Z", "region": "us-west-2", "rss_bytes_p95": 194248704, "error_rate_pct": 0.3, "request_rate_rps": 217, "gateway_retry_rate_rps": 2},
+    {"t": "2026-09-14T11:46:00Z", "region": "us-east-1", "rss_bytes_p95": 193986560, "error_rate_pct": 24.4, "request_rate_rps": 324, "gateway_retry_rate_rps": 6},
+    {"t": "2026-09-14T11:46:00Z", "region": "us-west-2", "rss_bytes_p95": 194510848, "error_rate_pct": 0.4, "request_rate_rps": 218, "gateway_retry_rate_rps": 2},
+    {"t": "2026-09-14T11:50:00Z", "region": "us-east-1", "rss_bytes_p95": 194248704, "error_rate_pct": 25.1, "request_rate_rps": 326, "gateway_retry_rate_rps": 6},
+    {"t": "2026-09-14T11:50:00Z", "region": "us-west-2", "rss_bytes_p95": 194772992, "error_rate_pct": 0.3, "request_rate_rps": 219, "gateway_retry_rate_rps": 2}
+  ]
+}

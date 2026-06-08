@@ -1,0 +1,6 @@
+{"t": "2026-08-20T03:01:14Z", "level": "ERROR", "service": "webhook-receiver", "msg": "tls: certificate has expired", "upstream": "partner.example.com", "endpoint": "/v1/subscriptions", "request_id": "wh-01"}
+{"t": "2026-08-20T03:04:42Z", "level": "ERROR", "service": "webhook-receiver", "msg": "tls: certificate has expired", "upstream": "partner.example.com", "endpoint": "/v1/subscriptions", "request_id": "wh-02"}
+{"t": "2026-08-20T03:09:18Z", "level": "ERROR", "service": "webhook-receiver", "msg": "tls: certificate has expired", "upstream": "partner.example.com", "endpoint": "/v1/subscriptions", "request_id": "wh-03"}
+{"t": "2026-08-20T03:14:25Z", "level": "ERROR", "service": "webhook-receiver", "msg": "tls: certificate has expired", "upstream": "partner.example.com", "endpoint": "/v1/subscriptions", "request_id": "wh-04"}
+{"t": "2026-08-20T03:18:51Z", "level": "ERROR", "service": "webhook-receiver", "msg": "tls: certificate has expired", "upstream": "partner.example.com", "endpoint": "/v1/subscriptions", "request_id": "wh-05"}
+{"t": "2026-08-20T03:22:34Z", "level": "ERROR", "service": "webhook-receiver", "msg": "tls: certificate has expired", "upstream": "partner.example.com", "endpoint": "/v1/subscriptions", "request_id": "wh-06"}

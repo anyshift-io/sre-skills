@@ -1,0 +1,25 @@
+{
+  "service": "checkout-api",
+  "deploys": [
+    {
+      "service": "checkout-api",
+      "version": "v6.3.7",
+      "commit": "b09d318",
+      "deployed_at": "2026-02-12T10:02:14Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "Bump observability sdk minor version. No protocol or serialization changes."
+    },
+    {
+      "service": "checkout-api",
+      "version": "v6.4.0",
+      "commit": "d1c4e22",
+      "deployed_at": "2026-02-15T13:12:08Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "internal/serializer/cart.go: switch /cart/:id response encoding from JSON to Protobuf for performance. Content-Type header unchanged. Feature flag was removed before merge per PR notes."
+    }
+  ],
+  "infra_changes": [],
+  "iam_changes": [],
+  "feature_flags": [],
+  "scheduled_jobs": []
+}

@@ -1,0 +1,12 @@
+{
+  "service": "notifications-svc",
+  "memory_limit_bytes": 536870912,
+  "samples": [
+    {"t": "2026-06-02T09:48:00Z", "rss_bytes_p95": 215809024, "error_rate_pct": 0.4, "request_rate_rps": 142, "gateway_retry_rate_rps": 2, "sms_error_rate_pct": 0.2, "email_error_rate_pct": 0.3, "push_error_rate_pct": 0.4},
+    {"t": "2026-06-02T09:51:00Z", "rss_bytes_p95": 216333312, "error_rate_pct": 12.4, "request_rate_rps": 144, "gateway_retry_rate_rps": 3, "sms_error_rate_pct": 100.0, "email_error_rate_pct": 0.3, "push_error_rate_pct": 0.4},
+    {"t": "2026-06-02T09:55:00Z", "rss_bytes_p95": 216595456, "error_rate_pct": 12.6, "request_rate_rps": 146, "gateway_retry_rate_rps": 3, "sms_error_rate_pct": 100.0, "email_error_rate_pct": 0.4, "push_error_rate_pct": 0.4},
+    {"t": "2026-06-02T10:00:00Z", "rss_bytes_p95": 216857600, "error_rate_pct": 12.8, "request_rate_rps": 148, "gateway_retry_rate_rps": 3, "sms_error_rate_pct": 100.0, "email_error_rate_pct": 0.3, "push_error_rate_pct": 0.5},
+    {"t": "2026-06-02T10:03:00Z", "rss_bytes_p95": 217119744, "error_rate_pct": 12.9, "request_rate_rps": 149, "gateway_retry_rate_rps": 3, "sms_error_rate_pct": 100.0, "email_error_rate_pct": 0.4, "push_error_rate_pct": 0.4},
+    {"t": "2026-06-02T10:10:00Z", "rss_bytes_p95": 217381888, "error_rate_pct": 13.1, "request_rate_rps": 151, "gateway_retry_rate_rps": 3, "sms_error_rate_pct": 100.0, "email_error_rate_pct": 0.3, "push_error_rate_pct": 0.4}
+  ]
+}

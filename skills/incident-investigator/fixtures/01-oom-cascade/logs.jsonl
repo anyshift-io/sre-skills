@@ -1,0 +1,8 @@
+{"t": "2026-03-12T14:30:11Z", "level": "WARN", "service": "payments-api", "pod": "payments-api-7d9c-x4k2", "msg": "GC pause exceeded soft threshold", "gc_pause_ms": 187}
+{"t": "2026-03-12T14:30:12Z", "level": "FATAL", "service": "payments-api", "pod": "payments-api-7d9c-x4k2", "msg": "runtime: out of memory", "heap_inuse_bytes": 504628224}
+{"t": "2026-03-12T14:30:14Z", "level": "ERROR", "service": "api-gateway", "msg": "upstream error", "upstream": "payments-api", "status": 502, "request_id": "req-c9d2e1"}
+{"t": "2026-03-12T14:30:15Z", "level": "INFO", "service": "api-gateway", "msg": "retry attempt", "attempt": 1, "upstream": "payments-api", "request_id": "req-c9d2e1"}
+{"t": "2026-03-12T14:30:48Z", "level": "FATAL", "service": "payments-api", "pod": "payments-api-7d9c-m2n8", "msg": "runtime: out of memory", "heap_inuse_bytes": 503054336}
+{"t": "2026-03-12T14:31:22Z", "level": "FATAL", "service": "payments-api", "pod": "payments-api-7d9c-b7q1", "msg": "runtime: out of memory", "heap_inuse_bytes": 506200064}
+{"t": "2026-03-12T14:32:01Z", "level": "ERROR", "service": "api-gateway", "msg": "upstream retry budget exhausted", "upstream": "payments-api", "request_id": "req-c9d2e1", "attempts": 3}
+{"t": "2026-03-12T14:32:05Z", "level": "FATAL", "service": "payments-api", "pod": "payments-api-7d9c-x4k2", "msg": "runtime: out of memory", "heap_inuse_bytes": 507510784}

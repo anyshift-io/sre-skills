@@ -1,0 +1,17 @@
+{
+  "service": "recommendations-api",
+  "deploys": [
+    {
+      "service": "recommendations-api",
+      "version": "v3.8.0",
+      "commit": "7c2e441",
+      "deployed_at": "2026-04-16T15:22:00Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "Cache product features in-memory for warmup. Cache eviction left as TODO. (Outside the current investigation window; identified only via widened-window re-run.)"
+    }
+  ],
+  "infra_changes": [],
+  "iam_changes": [],
+  "feature_flags": [],
+  "scheduled_jobs": []
+}

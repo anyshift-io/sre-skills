@@ -1,0 +1,17 @@
+{
+  "service": "payments-api",
+  "deploys": [
+    {
+      "service": "payments-api",
+      "version": "v4.20.1",
+      "commit": "f81a307",
+      "deployed_at": "2026-05-01T11:14:22Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "Add charge audit logging. No protocol changes."
+    }
+  ],
+  "infra_changes": [],
+  "iam_changes": [],
+  "feature_flags": [],
+  "scheduled_jobs": []
+}

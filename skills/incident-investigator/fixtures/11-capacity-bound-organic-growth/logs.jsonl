@@ -1,0 +1,6 @@
+{"t": "2026-10-08T10:48:32Z", "level": "WARN", "service": "search-svc", "msg": "query queue full, rejecting request", "queue_size": 64, "queue_capacity": 64}
+{"t": "2026-10-08T10:51:18Z", "level": "WARN", "service": "search-svc", "msg": "query queue full, rejecting request", "queue_size": 64, "queue_capacity": 64}
+{"t": "2026-10-08T10:54:45Z", "level": "WARN", "service": "search-svc", "msg": "query queue full, rejecting request", "queue_size": 64, "queue_capacity": 64}
+{"t": "2026-10-08T10:57:08Z", "level": "WARN", "service": "search-svc", "msg": "query queue full, rejecting request", "queue_size": 64, "queue_capacity": 64}
+{"t": "2026-10-08T11:00:42Z", "level": "WARN", "service": "search-svc", "msg": "query queue full, rejecting request", "queue_size": 64, "queue_capacity": 64}
+{"t": "2026-10-08T11:03:55Z", "level": "WARN", "service": "search-svc", "msg": "query queue full, rejecting request", "queue_size": 64, "queue_capacity": 64}

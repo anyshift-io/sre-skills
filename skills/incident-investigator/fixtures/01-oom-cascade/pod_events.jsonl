@@ -1,0 +1,9 @@
+{"t": "2026-03-12T14:18:30Z", "pod": "payments-api-7d9c-x4k2", "reason": "Started", "message": "Container payments-api started"}
+{"t": "2026-03-12T14:18:32Z", "pod": "payments-api-7d9c-m2n8", "reason": "Started", "message": "Container payments-api started"}
+{"t": "2026-03-12T14:18:35Z", "pod": "payments-api-7d9c-b7q1", "reason": "Started", "message": "Container payments-api started"}
+{"t": "2026-03-12T14:30:12Z", "pod": "payments-api-7d9c-x4k2", "reason": "OOMKilled", "message": "Container payments-api exceeded its memory limit (512Mi). Exit code 137."}
+{"t": "2026-03-12T14:30:48Z", "pod": "payments-api-7d9c-m2n8", "reason": "OOMKilled", "message": "Container payments-api exceeded its memory limit (512Mi). Exit code 137."}
+{"t": "2026-03-12T14:31:22Z", "pod": "payments-api-7d9c-b7q1", "reason": "OOMKilled", "message": "Container payments-api exceeded its memory limit (512Mi). Exit code 137."}
+{"t": "2026-03-12T14:32:05Z", "pod": "payments-api-7d9c-x4k2", "reason": "OOMKilled", "message": "Container payments-api exceeded its memory limit (512Mi). Exit code 137."}
+{"t": "2026-03-12T14:33:18Z", "pod": "payments-api-7d9c-r5j7", "reason": "OOMKilled", "message": "Container payments-api exceeded its memory limit (512Mi). Exit code 137."}
+{"t": "2026-03-12T14:34:01Z", "pod": "payments-api-7d9c-c9w4", "reason": "OOMKilled", "message": "Container payments-api exceeded its memory limit (512Mi). Exit code 137."}

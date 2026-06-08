@@ -1,0 +1,9 @@
+{"t": "2026-03-20T11:03:32Z", "level": "WARN", "service": "payments-api", "msg": "thread pool saturated, queue depth 142", "pool_size": 50, "queue_depth": 142}
+{"t": "2026-03-20T11:04:18Z", "level": "ERROR", "service": "payments-api", "msg": "ledger client request timeout after 800ms", "upstream": "ledger-svc", "elapsed_ms": 812}
+{"t": "2026-03-20T11:04:45Z", "level": "WARN", "service": "payments-api", "msg": "thread pool saturated, queue depth 187", "pool_size": 50, "queue_depth": 187}
+{"t": "2026-03-20T11:05:11Z", "level": "ERROR", "service": "payments-api", "msg": "ledger client request timeout after 800ms", "upstream": "ledger-svc", "elapsed_ms": 818}
+{"t": "2026-03-20T11:06:02Z", "level": "ERROR", "service": "api-gateway", "msg": "upstream slow", "upstream": "payments-api", "status": 503, "elapsed_ms": 1023}
+{"t": "2026-03-20T11:06:03Z", "level": "INFO", "service": "api-gateway", "msg": "retry attempt", "attempt": 1, "upstream": "payments-api"}
+{"t": "2026-03-20T11:08:12Z", "level": "WARN", "service": "payments-api", "msg": "thread pool saturated, queue depth 241", "pool_size": 50, "queue_depth": 241}
+{"t": "2026-03-20T11:10:34Z", "level": "ERROR", "service": "api-gateway", "msg": "upstream retry budget exhausted", "upstream": "payments-api", "attempts": 3}
+{"t": "2026-03-20T11:13:01Z", "level": "WARN", "service": "payments-api", "msg": "thread pool saturated, queue depth 294", "pool_size": 50, "queue_depth": 294}

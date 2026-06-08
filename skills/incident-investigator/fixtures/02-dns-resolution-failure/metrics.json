@@ -1,0 +1,13 @@
+{
+  "service": "inventory-svc",
+  "memory_limit_bytes": 268435456,
+  "samples": [
+    {"t": "2026-04-08T09:32:00Z", "rss_bytes_p95": 89128960, "error_rate_pct": 0.2, "request_rate_rps": 184, "gateway_retry_rate_rps": 2, "dns_resolver_errors_rps": 0.1},
+    {"t": "2026-04-08T09:35:00Z", "rss_bytes_p95": 89653248, "error_rate_pct": 0.6, "request_rate_rps": 188, "gateway_retry_rate_rps": 3, "dns_resolver_errors_rps": 0.4},
+    {"t": "2026-04-08T09:40:00Z", "rss_bytes_p95": 90177536, "error_rate_pct": 1.8, "request_rate_rps": 191, "gateway_retry_rate_rps": 7, "dns_resolver_errors_rps": 1.2},
+    {"t": "2026-04-08T09:45:00Z", "rss_bytes_p95": 90439680, "error_rate_pct": 2.9, "request_rate_rps": 196, "gateway_retry_rate_rps": 11, "dns_resolver_errors_rps": 1.4},
+    {"t": "2026-04-08T09:47:00Z", "rss_bytes_p95": 90439680, "error_rate_pct": 3.4, "request_rate_rps": 201, "gateway_retry_rate_rps": 13, "dns_resolver_errors_rps": 1.5},
+    {"t": "2026-04-08T09:50:00Z", "rss_bytes_p95": 90701824, "error_rate_pct": 3.7, "request_rate_rps": 204, "gateway_retry_rate_rps": 14, "dns_resolver_errors_rps": 1.4},
+    {"t": "2026-04-08T09:53:00Z", "rss_bytes_p95": 90963968, "error_rate_pct": 3.6, "request_rate_rps": 207, "gateway_retry_rate_rps": 14, "dns_resolver_errors_rps": 1.5}
+  ]
+}
