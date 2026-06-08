@@ -2,19 +2,15 @@
 
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](./LICENSE)
 
-Open-source library of methodology-shaped SRE skills for AI agents.
+SRE methodology skills for AI agents. Each skill packages one reliability workflow (investigating a live incident, handing over oncall, writing a postmortem) as a self-contained module your agent loads and runs.
 
-Built and maintained by [Anyshift](https://www.anyshift.io). Each skill packages a SRE methodology (investigating an incident, handing over oncall, authoring a postmortem) as a self-contained module an AI agent can run.
+Built and maintained by [Anyshift](https://www.anyshift.io).
 
-## How this works
+## Why use these
 
-Three layers, in order of integration depth:
+Your agent already writes code and runs commands. It does not know how a seasoned SRE actually works an incident: which signals to correlate first, when a deploy is the prime suspect, when to stop digging and page a human. These skills encode that methodology so the agent follows a real playbook instead of improvising.
 
-1. **Vendor-neutral default.** Every skill runs end-to-end without an Anyshift dependency. You get the methodology, the worked examples, and the fixture-based replay tests. This is the layer the open-source community contributes to.
-
-2. **Anyshift MCP as optional context primer.** Skills can opt-in to richer context from the Anyshift MCP server. When the integration is wired up for a skill, the skill README publishes a measured "with vs without" delta so the value is explicit, not assumed.
-
-3. **Annie pre-loaded.** Users running Anyshift's Annie agent get the skills already loaded, with infrastructure context (Terraform state, AWS / GCP / Azure inventory, recent deploys) wired in.
+Every skill runs end-to-end with no Anyshift account and no external credentials. The methodology, the worked examples, and the replay tests all work offline against fixtures.
 
 ## Skills
 
@@ -26,23 +22,38 @@ Three layers, in order of integration depth:
 | `postmortem-author` | *In progress* | Timeline reconstruction, contributing factors, impact quantification. |
 | `reliability-auditor` | *In progress* | Production-readiness audit. |
 
-## Quality bar
+Start with [`incident-investigator`](./skills/incident-investigator/): it is the shipped reference template and shows the shape every other skill follows.
 
-Every skill in this repo ships with:
+## Using a skill
 
-- Two worked examples (real incidents or canonical scenarios).
-- Fixture-based replay tests that work without external credentials.
+Clone the repo and point your agent at the skill you want. Each skill directory is self-contained: the methodology, the worked examples, and the fixture-based replay tests live together, so you can run the skill against the fixtures before pointing it at your own infrastructure.
+
+```sh
+git clone https://github.com/anyshift-io/sre-skills.git
+```
+
+Every skill also documents its failure modes: where it is likely to be wrong, and where the agent should escalate to a human instead of acting.
+
+## Going deeper with Anyshift (optional)
+
+The skills work standalone. Two optional layers add infrastructure context:
+
+- **Anyshift MCP as a context primer.** Skills can opt into richer context from the Anyshift MCP server. When the integration is wired up for a skill, that skill publishes a measured "with vs without" delta, so the added value is explicit rather than assumed.
+- **Annie, pre-loaded.** Running Anyshift's Annie agent gives you these skills already loaded, with your Terraform state, cloud inventory (AWS / GCP / Azure), and recent deploys wired in.
+
+## What each skill guarantees
+
+- Two worked examples drawn from real incidents or canonical scenarios.
+- Fixture-based replay tests that run without external credentials.
 - An explicit failure-modes section: where the skill is wrong, where the agent should escalate to a human.
 
-This bar exists because methodology skills age fast if they're not exercised against real fixtures.
-
-## Adjacent: awesome-sre-skills
+## Looking for more
 
 For a curated index of SRE skills (ours and others), MCP servers, and reading, see [anyshift-io/awesome-sre-skills](https://github.com/anyshift-io/awesome-sre-skills).
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
+Contributions to the vendor-neutral skills are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 
