@@ -1,0 +1,16 @@
+{
+  "QueueUrl": "https://sqs.eu-west-1.amazonaws.com/211125758836/click-events",
+  "Attributes": {
+    "QueueArn": "arn:aws:sqs:eu-west-1:211125758836:click-events",
+    "VisibilityTimeout": "30",
+    "MessageRetentionPeriod": "300",
+    "MaximumMessageSize": "262144",
+    "DelaySeconds": "0",
+    "ReceiveMessageWaitTimeSeconds": "20",
+    "SqsManagedSseEnabled": "true",
+    "RedrivePolicy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:eu-west-1:211125758836:click-events-dlq\",\"maxReceiveCount\":5}",
+    "ApproximateNumberOfMessages": "1190",
+    "CreatedTimestamp": "1737974400",
+    "LastModifiedTimestamp": "1748000000"
+  }
+}
