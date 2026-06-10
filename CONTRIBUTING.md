@@ -20,7 +20,7 @@ This is non-negotiable. A skill that only works with Anyshift loaded belongs in 
 
 ## Skill layout
 
-The canonical layout is established by `skills/incident-investigator/` (the reference template). Mirror that structure for new skills.
+The canonical layout is established by `skills/kubectl-investigator/` (the reference template). Mirror that structure for new skills.
 
 ## How to add a new skill
 
