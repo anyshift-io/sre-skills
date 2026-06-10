@@ -1,8 +1,0 @@
-{
-  "service": "webhook-receiver",
-  "deploys": [],
-  "infra_changes": [],
-  "iam_changes": [],
-  "feature_flags": [],
-  "scheduled_jobs": []
-}

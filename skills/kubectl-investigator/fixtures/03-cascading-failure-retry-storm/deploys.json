@@ -1,0 +1,17 @@
+{
+  "service": "payments-api",
+  "deploys": [
+    {
+      "service": "payments-api",
+      "version": "v4.19.2",
+      "commit": "5e7a112",
+      "deployed_at": "2026-03-11T09:14:22Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "Refactor invoice number formatting; no behavior change to ledger client."
+    }
+  ],
+  "infra_changes": [],
+  "rbac_changes": [],
+  "feature_flags": [],
+  "scheduled_jobs": []
+}

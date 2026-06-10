@@ -20,7 +20,7 @@ Three layers, in order of integration depth:
 
 | Skill | Status | What it does |
 |---|---|---|
-| [`incident-investigator`](./skills/incident-investigator/) | Shipped (reference template) | Investigates a live incident: correlates deploys, traces, logs, recent IAM changes. Covers OOM, DNS, cascading-failure, deploy-correlator paths. |
+| [`kubectl-investigator`](./skills/kubectl-investigator/) | Shipped (reference template) | Investigates a live Kubernetes incident: correlates rollouts, traces, logs, recent RBAC / ConfigMap changes. Covers OOM, DNS, cascading-failure, deploy-correlator paths. |
 | `change-impact-analyzer` | *In progress* | Pre-flight checks: IAM blast radius, drift detection, what this PR breaks. |
 | `oncall-handover` | *In progress* | Reviews cert expiry, deploy state, SLO burn during oncall handover. |
 | `postmortem-author` | *In progress* | Timeline reconstruction, contributing factors, impact quantification. |

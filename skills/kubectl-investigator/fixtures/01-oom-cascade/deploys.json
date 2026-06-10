@@ -1,0 +1,25 @@
+{
+  "service": "payments-api",
+  "deploys": [
+    {
+      "service": "payments-api",
+      "version": "v4.17.4",
+      "commit": "a1b8e09",
+      "deployed_at": "2026-03-10T09:14:22Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "internal/ledger/retry.go: increase ledger-svc retry budget from 2 to 3"
+    },
+    {
+      "service": "payments-api",
+      "version": "v4.18.0",
+      "commit": "9f3a2c1",
+      "deployed_at": "2026-03-12T14:18:14Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "internal/webhook/buffer.go: introduce WebhookBuffer that holds full payload bodies in memory before batch-writing. Per-request memory footprint increase from ~80MB to ~210MB."
+    }
+  ],
+  "infra_changes": [],
+  "rbac_changes": [],
+  "feature_flags": [],
+  "scheduled_jobs": []
+}
