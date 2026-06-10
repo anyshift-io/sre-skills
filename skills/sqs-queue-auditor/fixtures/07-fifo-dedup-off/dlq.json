@@ -1,0 +1,18 @@
+{
+  "QueueUrl": "https://sqs.eu-west-1.amazonaws.com/211125758836/inventory-updates-dlq.fifo",
+  "Attributes": {
+    "QueueArn": "arn:aws:sqs:eu-west-1:211125758836:inventory-updates-dlq.fifo",
+    "VisibilityTimeout": "120",
+    "MessageRetentionPeriod": "1209600",
+    "MaximumMessageSize": "262144",
+    "DelaySeconds": "0",
+    "ReceiveMessageWaitTimeSeconds": "0",
+    "SqsManagedSseEnabled": "true",
+    "FifoQueue": "true",
+    "ContentBasedDeduplication": "false",
+    "RedriveAllowPolicy": "{\"redrivePermission\":\"byQueue\",\"sourceQueueArns\":[\"arn:aws:sqs:eu-west-1:211125758836:inventory-updates.fifo\"]}",
+    "ApproximateNumberOfMessages": "0",
+    "CreatedTimestamp": "1737974400",
+    "LastModifiedTimestamp": "1748000000"
+  }
+}

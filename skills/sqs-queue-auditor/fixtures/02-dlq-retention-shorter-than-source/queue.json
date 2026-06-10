@@ -1,0 +1,16 @@
+{
+  "QueueUrl": "https://sqs.eu-west-1.amazonaws.com/211125758836/order-events",
+  "Attributes": {
+    "QueueArn": "arn:aws:sqs:eu-west-1:211125758836:order-events",
+    "VisibilityTimeout": "60",
+    "MessageRetentionPeriod": "345600",
+    "MaximumMessageSize": "262144",
+    "DelaySeconds": "0",
+    "ReceiveMessageWaitTimeSeconds": "20",
+    "SqsManagedSseEnabled": "true",
+    "RedrivePolicy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:eu-west-1:211125758836:order-events-dlq\",\"maxReceiveCount\":5}",
+    "ApproximateNumberOfMessages": "88",
+    "CreatedTimestamp": "1737974400",
+    "LastModifiedTimestamp": "1748000000"
+  }
+}
