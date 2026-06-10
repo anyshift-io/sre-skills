@@ -41,28 +41,53 @@ This pattern matters here because a full run is ~220 LLM calls: at that length a
 
 ## Reference run results
 
-Not yet scored. The harness is committed and reproducible; run `python tests/eval/run_eval.py --trials 5` (or `bash tests/eval/run_until_pass.sh 5`) to produce the numbers, then fill in the table below.
+The setup:
 
-| Fixture | Control | Treatment |
-|---|---:|---:|
-| 02 PassRole + RunInstances (E1) | — | — |
-| 04 UpdateFunctionCode (E3) | — | — |
-| 09 Public trust policy (X1) | — | — |
-| 11 Clean control | — | — |
-| **Aggregate mean** | — | — |
+- Model: Claude Sonnet 4.6 (`claude-sonnet-4-6`) as both agent and judge
+- Trials per cell: **N=3**
+- Fixtures: all 11, each run in both conditions (66 cells)
+- Scoring: LLM-as-judge against the 7-item rubric, anchored to the deterministic reference audit (`_audit.py`) as ground truth
 
-### Where the lift is expected to come from
+Each cell is a 7-item score (0–7), averaged over the three trials.
 
-The per-item breakdown is the informative part. Based on the methodology's design and the sibling skills' measured runs, the lift should concentrate on:
+| Fixture | Control | Treatment | Lift |
+|---|---:|---:|---:|
+| 01 Full admin (W1) | 7.00 | 7.00 | +0.00 |
+| 02 PassRole + RunInstances (E1) | 5.33 | 7.00 | +1.67 |
+| 03 CreatePolicyVersion (E2) | 6.00 | 7.00 | +1.00 |
+| 04 UpdateFunctionCode (E3) | 6.00 | 6.00 | +0.00 |
+| 05 Allow + NotAction (W3) | 7.00 | 6.67 | −0.33 |
+| 06 Attach policy self (E4) | 6.00 | 6.67 | +0.67 |
+| 07 UpdateAssumeRolePolicy (E5) | 6.00 | 7.00 | +1.00 |
+| 08 Service wildcard + exfil (W2/W5) | 4.67 | 6.33 | +1.67 |
+| 09 Public trust policy (X1) | 5.33 | 7.00 | +1.67 |
+| 10 Scoped PassRole + boundary (E1 high) | 5.00 | 6.67 | +1.67 |
+| 11 Clean control | 3.00 | 7.00 | +4.00 |
+| **Aggregate mean** | **5.58** | **6.76** | **+1.18** |
 
-| Rubric item | What a cold agent tends to do | What the skill should fix |
-|---|---|---|
-| 4. Cross-statement reasoning | Reads each statement, finds nothing individually damning on the PassRole-plus-RunInstances or two-attached-policies fixtures, and declares the policy fine. | Evaluates the union of statements and names the escalation combo. |
-| 6. Boundary | Presents a single policy read as a complete access verdict; never mentions the permissions boundary, the other attached policies, or org SCPs. | Names the joins it cannot make. |
-| 3. No false positives | On the clean control, invents a finding ("this looks broad"); on the public-trust fixture, may call a correctly-narrowed wildcard "public". | Returns zero findings on the control and respects the ExternalId/org narrowing. |
-| 5. Criticality | Rates a broad read as critical, or an unscoped admin grant the same as a scoped one. | Headlines the escalation, downgrades the scoped PassRole, defers the read reach. |
+**Lift: +1.18 / 7 (+21%).** Treatment beats control on 8 fixtures, ties on 2 (01 full-admin and 04, both unmissable), and loses on 1 (05, a noise loss). Verdict: skill is clearly valuable.
 
-Confirm or refute these once the eval is scored. If the lift on a fixture is near zero, `SKILL.md` probably needs to cover that case better; that signal is the whole point of committing the eval.
+### Where the lift comes from
+
+The per-item breakdown is more informative than the totals (mean pass-rate across all trials, 0–1 per item):
+
+| Rubric item | Control | Treatment | What happened |
+|---|---:|---:|---|
+| 3. No false positives | **0.18** | 0.85 | The dominant driver. Cold Sonnet invents a finding 82% of the time — most visibly on the clean control (11), where it manufactures concerns on a least-privilege policy, and on the public-trust fixture (09), where it can call a correctly-narrowed wildcard "public". The skill teaches it when *not* to fire. |
+| 5. Criticality | 0.73 | 0.91 | The skill's scoped-vs-unscoped PassRole calibration: control rates the scoped E1 (fixture 10) the same critical as the unscoped one (02); treatment downgrades it to high and defers to the boundary. |
+| 6. Boundary | 0.85 | 1.00 | Control sometimes presents a policy read as a complete access verdict; treatment always names the joins it cannot make. |
+| 2. Findings / 7. Recommendation | 0.91 | 1.00 | Small, consistent gains. |
+| 1. Parse | 1.00 | 1.00 | Both expand wildcards and read the statements fine. |
+| 4. Cross-statement reasoning | 1.00 | 1.00 | **The honest surprise.** Sonnet 4.6 already chains `PassRole`+`RunInstances` across statements *without* the skill. The fixture-02 lift (+1.67) therefore comes from criticality and no-false-positives, not from the combo being missed. On a weaker model item 4 would likely separate; on Sonnet the differentiator is discipline, not detection. |
+
+The clean control (11) shows the largest single lift (+4.00). That is expected and is the point: a cold agent's instinct is to find something, and a correctly-scoped policy is the hardest thing for it to leave alone. The skill's value there is the discipline to report zero findings and spend the output on the boundary.
+
+### Caveats on these specific numbers
+
+- **N=3 per cell** is directional. A full run (`--trials 5`) would tighten the variance; several cells have a trial-to-trial std around 0.5–1.0, so individual fixtures can shift by ±0.5.
+- **The one negative (05, −0.33)** is within that noise: control aced the NotAction fixture (7.00) and one treatment trial scored 6/7. It is not a methodology regression — both conditions handle `Allow`+`NotAction` well.
+- **LLM-as-judge.** The judge is itself a model and can be wrong. Spot-check graded outputs (in `eval_results.json`) to calibrate trust.
+- **Sonnet as agent.** A stronger agent (Opus) would likely raise control scores — especially on cross-statement reasoning, which Sonnet already passes — and shrink the absolute lift. The honest comparison is against the production model.
 
 ## What the eval does
 
