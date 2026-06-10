@@ -2,47 +2,76 @@
 
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](./LICENSE)
 
-Open-source library of methodology-shaped SRE skills for AI agents.
+SRE methodology skills for AI agents. Each skill packages one reliability workflow (investigating a live incident, handing over oncall, writing a postmortem) as a self-contained module your agent loads and runs.
 
-Built and maintained by [Anyshift](https://www.anyshift.io). Each skill packages a SRE methodology (investigating an incident, handing over oncall, authoring a postmortem) as a self-contained module an AI agent can run.
+Built and maintained by [Anyshift](https://www.anyshift.io).
 
-## How this works
+## Why use these
 
-Three layers, in order of integration depth:
+Your agent already writes code and runs commands. It does not know how a seasoned SRE actually works an incident: which signals to correlate first, when a deploy is the prime suspect, when to stop digging and page a human. These skills encode that methodology so the agent follows a real playbook instead of improvising.
 
-1. **Vendor-neutral default.** Every skill runs end-to-end without an Anyshift dependency. You get the methodology, the worked examples, and the fixture-based replay tests. This is the layer the open-source community contributes to.
-
-2. **Anyshift MCP as optional context primer.** Skills can opt-in to richer context from the Anyshift MCP server. When the integration is wired up for a skill, the skill README publishes a measured "with vs without" delta so the value is explicit, not assumed.
-
-3. **Annie pre-loaded.** Users running Anyshift's Annie agent get the skills already loaded, with infrastructure context (Terraform state, AWS / GCP / Azure inventory, recent deploys) wired in.
+Every skill runs end-to-end with no Anyshift account and no external credentials. The methodology, the worked examples, and the replay tests all work offline against fixtures.
 
 ## Skills
 
-| Skill | Status | What it does |
+Each skill targets one real product and one job over it: audit an IAM policy, triage a Terraform plan, resolve an S3 bucket's effective access. It does that job end-to-end, offline, against fixtures. Not a wrapper that dumps the API response back: each one carries the judgment a senior engineer applies to that one source, the thresholds and known-bad combinations that separate signal from a clean-looking config.
+
+Then it stops. A single source only knows itself. The moment a question needs a *join* (this role to everything it can actually reach, this queue to its producers and consumers, this plan to the running infrastructure it will move) the data runs out. Each skill names exactly where that happens and what's missing, so the boundary is explicit instead of a silent wrong answer. That boundary is the same one every time: the join across resources, across sources, or across time.
+
+| Skill | Domain | What it does |
 |---|---|---|
-| [`kubectl-investigator`](./skills/kubectl-investigator/) | Shipped (reference template) | Investigates a live Kubernetes incident: correlates rollouts, traces, logs, recent RBAC / ConfigMap changes. Covers OOM, DNS, cascading-failure, deploy-correlator paths. |
-| `change-impact-analyzer` | *In progress* | Pre-flight checks: IAM blast radius, drift detection, what this PR breaks. |
-| `oncall-handover` | *In progress* | Reviews cert expiry, deploy state, SLO burn during oncall handover. |
-| `postmortem-author` | *In progress* | Timeline reconstruction, contributing factors, impact quantification. |
-| `reliability-auditor` | *In progress* | Production-readiness audit. |
+| [`sqs-queue-auditor`](./skills/sqs-queue-auditor/) | AWS | Audits redrive/DLQ wiring, `maxReceiveCount`, retention ordering against the DLQ, and a visibility timeout left at the risky default: the queue-side config that silently drops or re-delivers messages while every attribute reads as fine. |
+| `iam-policy-auditor` | AWS | Expands wildcards to concrete permissions and flags known privilege-escalation combos (`PassRole`+`RunInstances`, `CreatePolicyVersion`, `UpdateFunctionCode`+`PassRole`) that no single statement looks guilty of. |
+| `security-group-exposure-auditor` | AWS | Collapses overlapping and redundant rules into the effective allow-set, flags wide CIDRs and egress-to-anywhere, and surfaces SG-to-SG references as the lateral-movement primitive a per-rule read misses. |
+| `s3-access-auditor` | AWS | Resolves *effective* public and cross-account access across Block Public Access, bucket policy, ACL, and access points: the four interacting layers that are each read wrong one at a time. |
+| `terraform-plan-risk-reporter` | IaC | Ranks plan changes by blast risk, isolating destroys and force-replacements of stateful or irreplaceable resources from the harmless in-place updates they hide among. |
+| `github-actions-flake-reporter` | CI/CD | Detects flaky jobs (pass-on-rerun on an unchanged SHA), clusters failures by cause, and flags duration regressions across run history, not just the last red run. |
 
-## Quality bar
+[`sqs-queue-auditor`](./skills/sqs-queue-auditor/) is the first of these built out (8 worked examples, fixture-based replay tests, a committed ablation eval); the rest are *planned*. [`kubectl-investigator`](./skills/kubectl-investigator/) stays as the methodology-shaped reference template: it shows the directory shape, the worked-example format, and the fixture-based replay tests every skill above follows.
 
-Every skill in this repo ships with:
+## Using a skill
 
-- Two worked examples (real incidents or canonical scenarios).
-- Fixture-based replay tests that work without external credentials.
+### Claude Code (recommended)
+
+These skills ship as a plugin in Anyshift's [Claude Code](https://claude.com/claude-code) marketplace. In a Claude Code session:
+
+```
+/plugin marketplace add anyshift-io/claude-plugins
+/plugin install sre-skills@anyshift
+```
+
+The skills are now loaded. The agent reaches for the right one whenever you ask something that maps to an incident, a change review, an oncall handover, a postmortem, or a reliability audit. Pull new skills and versions later with `/plugin marketplace update anyshift`.
+
+### Any other agent
+
+Clone the repo and point your agent at the skill you want. Each skill directory is self-contained: the methodology, the worked examples, and the fixture-based replay tests live together, so you can run the skill against the fixtures before pointing it at your own infrastructure.
+
+```sh
+git clone https://github.com/anyshift-io/sre-skills.git
+```
+
+Every skill also documents its failure modes: where it is likely to be wrong, and where the agent should escalate to a human instead of acting.
+
+## Going deeper with Anyshift (optional)
+
+The skills work standalone. Two optional layers add infrastructure context:
+
+- **Anyshift MCP as a context primer.** Skills can opt into richer context from the Anyshift MCP server. When the integration is wired up for a skill, that skill publishes a measured "with vs without" delta, so the added value is explicit rather than assumed.
+- **Annie, pre-loaded.** Running Anyshift's Annie agent gives you these skills already loaded, with your Terraform state, cloud inventory (AWS / GCP / Azure), and recent deploys wired in.
+
+## What each skill guarantees
+
+- Two worked examples drawn from real incidents or canonical scenarios.
+- Fixture-based replay tests that run without external credentials.
 - An explicit failure-modes section: where the skill is wrong, where the agent should escalate to a human.
 
-This bar exists because methodology skills age fast if they're not exercised against real fixtures.
-
-## Adjacent: awesome-sre-skills
+## Looking for more
 
 For a curated index of SRE skills (ours and others), MCP servers, and reading, see [anyshift-io/awesome-sre-skills](https://github.com/anyshift-io/awesome-sre-skills).
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
+Contributions to the vendor-neutral skills are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 

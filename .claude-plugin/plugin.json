@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "sre-skills",
+  "description": "Vendor-neutral SRE methodology skills for AI agents: investigate a live incident, analyze change impact, hand over oncall, author a postmortem, audit reliability. Runs offline against fixtures, no credentials required.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/anyshift-io/sre-skills",
+  "repository": "https://github.com/anyshift-io/sre-skills",
+  "keywords": [
+    "sre",
+    "incident-response",
+    "postmortem",
+    "oncall",
+    "ai-agents",
+    "site-reliability-engineering"
+  ],
+  "author": {
+    "name": "Anyshift",
+    "email": "hello@anyshift.io"
+  }
+}
