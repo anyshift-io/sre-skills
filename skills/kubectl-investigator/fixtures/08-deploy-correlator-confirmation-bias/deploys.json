@@ -1,0 +1,26 @@
+{
+  "service": "users-api",
+  "deploys": [
+    {
+      "service": "users-api",
+      "version": "v9.1.0",
+      "commit": "4e2c891",
+      "deployed_at": "2026-07-11T14:22:14Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "internal/profile/avatar.go: switch avatar CDN URL format on /profile page."
+    }
+  ],
+  "infra_changes": [],
+  "rbac_changes": [
+    {
+      "resource": "rolebinding/users-api-secrets-reader",
+      "kind": "RoleBinding",
+      "namespace": "users",
+      "changed_at": "2026-07-11T14:25:42Z",
+      "changed_by": "platform-team",
+      "diff_summary": "Deleted the RoleBinding granting the users-api ServiceAccount 'get' on Secrets in namespace 'users'. Audit log note: 'intended for sibling cluster' (operator error)."
+    }
+  ],
+  "feature_flags": [],
+  "scheduled_jobs": []
+}

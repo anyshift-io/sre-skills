@@ -27,7 +27,7 @@ Then it stops. A single source only knows itself. The moment a question needs a 
 | `terraform-plan-risk-reporter` | IaC | Ranks plan changes by blast risk, isolating destroys and force-replacements of stateful or irreplaceable resources from the harmless in-place updates they hide among. |
 | `github-actions-flake-reporter` | CI/CD | Detects flaky jobs (pass-on-rerun on an unchanged SHA), clusters failures by cause, and flags duration regressions across run history, not just the last red run. |
 
-[`sqs-queue-auditor`](./skills/sqs-queue-auditor/) (8 worked examples) and [`iam-policy-auditor`](./skills/iam-policy-auditor/) (11 worked examples) are the first two built out, each with fixture-based replay tests and a committed ablation eval; the rest are *planned*. [`incident-investigator`](./skills/incident-investigator/) stays as the methodology-shaped reference template: it shows the directory shape, the worked-example format, and the fixture-based replay tests every skill above follows.
+[`sqs-queue-auditor`](./skills/sqs-queue-auditor/) (8 worked examples) and [`iam-policy-auditor`](./skills/iam-policy-auditor/) (11 worked examples) are the first two built out, each with fixture-based replay tests and a committed ablation eval; the rest are *planned*. [`kubectl-investigator`](./skills/kubectl-investigator/) stays as the methodology-shaped reference template: it shows the directory shape, the worked-example format, and the fixture-based replay tests every skill above follows.
 
 ## Using a skill
 

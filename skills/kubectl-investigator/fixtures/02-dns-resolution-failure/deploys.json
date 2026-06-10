@@ -1,0 +1,25 @@
+{
+  "service": "inventory-svc",
+  "deploys": [
+    {
+      "service": "inventory-svc",
+      "version": "v2.9.1",
+      "commit": "44e1b02",
+      "deployed_at": "2026-04-07T16:11:09Z",
+      "deployed_by": "ci-cd",
+      "diff_summary": "Bump catalog-svc client retry budget from 1 to 2"
+    }
+  ],
+  "infra_changes": [
+    {
+      "resource": "kube-system/coredns",
+      "kind": "ConfigMap",
+      "changed_at": "2026-04-08T09:32:18Z",
+      "changed_by": "platform-team",
+      "diff_summary": "Add 'forward .internal 10.100.0.53' line. Note: previous resolver IP was 10.100.0.5; new line introduces a typo (.53 vs .5)."
+    }
+  ],
+  "rbac_changes": [],
+  "feature_flags": [],
+  "scheduled_jobs": []
+}
