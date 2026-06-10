@@ -1,0 +1,4 @@
+{
+  "principal": "role/data-platform-operator",
+  "note": "Written to mean 'everything except the dangerous services'. The author reached for NotAction; the result allows every action in every other service, present and future."
+}

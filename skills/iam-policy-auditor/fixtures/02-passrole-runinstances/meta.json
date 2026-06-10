@@ -1,0 +1,4 @@
+{
+  "principal": "role/build-fleet-manager",
+  "note": "Two attached policies modelled as one document: a fleet-management grant and a routine PassRole grant, each added by a different change."
+}

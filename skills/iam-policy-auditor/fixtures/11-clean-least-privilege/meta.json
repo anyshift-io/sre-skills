@@ -1,0 +1,4 @@
+{
+  "principal": "role/orders-processor",
+  "note": "A least-privilege worker role: read one table, write one bucket prefix, decrypt with one key via one service. The control case."
+}

@@ -1,0 +1,4 @@
+{
+  "principal": "role/access-administrator",
+  "note": "Manages who can assume which role. The trust-editing grant plus a broad sts:AssumeRole is the full escalation in one identity."
+}

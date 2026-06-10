@@ -1,0 +1,4 @@
+{
+  "principal": "role/pipeline-policy-manager",
+  "note": "A role that manages a family of pipeline policies. The policy-versioning grant reads like routine policy administration."
+}

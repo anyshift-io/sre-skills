@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BatchSubmitterBoundary",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:RunInstances",
+        "ec2:Describe*",
+        "iam:PassRole",
+        "s3:GetObject",
+        "logs:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
