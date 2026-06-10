@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadOrdersTable",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:Query"
+      ],
+      "Resource": "arn:aws:dynamodb:eu-west-1:488213749302:table/orders"
+    },
+    {
+      "Sid": "WriteProcessedBucket",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::orders-processed/*"
+    },
+    {
+      "Sid": "DecryptWithOrdersKey",
+      "Effect": "Allow",
+      "Action": [
+        "kms:Decrypt"
+      ],
+      "Resource": "arn:aws:kms:eu-west-1:488213749302:key/8f2c1a4e-1b6d-4c3a-9e21-0a7b3c5d6e7f",
+      "Condition": {
+        "StringEquals": {
+          "kms:ViaService": "dynamodb.eu-west-1.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

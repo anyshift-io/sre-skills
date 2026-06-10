@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ManageRoleTrust",
+      "Effect": "Allow",
+      "Action": [
+        "iam:UpdateAssumeRolePolicy",
+        "iam:GetRole",
+        "iam:ListRoles"
+      ],
+      "Resource": "arn:aws:iam::488213749302:role/*"
+    },
+    {
+      "Sid": "AssumeManagedRoles",
+      "Effect": "Allow",
+      "Action": "sts:AssumeRole",
+      "Resource": "arn:aws:iam::488213749302:role/*"
+    }
+  ]
+}

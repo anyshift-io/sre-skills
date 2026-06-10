@@ -1,0 +1,4 @@
+{
+  "principal": "role/ci-deployer",
+  "note": "An inline policy on a CI deployment role, written as a convenience during bootstrap and never tightened."
+}

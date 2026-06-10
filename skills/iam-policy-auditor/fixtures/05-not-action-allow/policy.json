@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EverythingExceptTheScaryServices",
+      "Effect": "Allow",
+      "NotAction": [
+        "iam:*",
+        "sts:*",
+        "organizations:*",
+        "account:*",
+        "ec2:*",
+        "lambda:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
