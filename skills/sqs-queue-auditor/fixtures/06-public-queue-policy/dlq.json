@@ -1,0 +1,16 @@
+{
+  "QueueUrl": "https://sqs.eu-west-1.amazonaws.com/211125758836/inbound-webhooks-dlq",
+  "Attributes": {
+    "QueueArn": "arn:aws:sqs:eu-west-1:211125758836:inbound-webhooks-dlq",
+    "VisibilityTimeout": "120",
+    "MessageRetentionPeriod": "1209600",
+    "MaximumMessageSize": "262144",
+    "DelaySeconds": "0",
+    "ReceiveMessageWaitTimeSeconds": "0",
+    "SqsManagedSseEnabled": "true",
+    "RedriveAllowPolicy": "{\"redrivePermission\":\"byQueue\",\"sourceQueueArns\":[\"arn:aws:sqs:eu-west-1:211125758836:inbound-webhooks\"]}",
+    "ApproximateNumberOfMessages": "4",
+    "CreatedTimestamp": "1737974400",
+    "LastModifiedTimestamp": "1748000000"
+  }
+}

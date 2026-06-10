@@ -1,0 +1,17 @@
+{
+  "QueueUrl": "https://sqs.eu-west-1.amazonaws.com/211125758836/inbound-webhooks",
+  "Attributes": {
+    "QueueArn": "arn:aws:sqs:eu-west-1:211125758836:inbound-webhooks",
+    "VisibilityTimeout": "120",
+    "MessageRetentionPeriod": "345600",
+    "MaximumMessageSize": "262144",
+    "DelaySeconds": "0",
+    "ReceiveMessageWaitTimeSeconds": "20",
+    "SqsManagedSseEnabled": "false",
+    "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"inbound-webhooks-policy\",\"Statement\":[{\"Sid\":\"AllowSend\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"sqs:SendMessage\",\"Resource\":\"arn:aws:sqs:eu-west-1:211125758836:inbound-webhooks\"}]}",
+    "RedrivePolicy": "{\"deadLetterTargetArn\":\"arn:aws:sqs:eu-west-1:211125758836:inbound-webhooks-dlq\",\"maxReceiveCount\":5}",
+    "ApproximateNumberOfMessages": "73",
+    "CreatedTimestamp": "1737974400",
+    "LastModifiedTimestamp": "1748000000"
+  }
+}
