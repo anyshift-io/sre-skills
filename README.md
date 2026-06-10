@@ -14,15 +14,20 @@ Every skill runs end-to-end with no Anyshift account and no external credentials
 
 ## Skills
 
-| Skill | Status | What it does |
-|---|---|---|
-| [`incident-investigator`](./skills/incident-investigator/) | Shipped (reference template) | Investigates a live incident: correlates deploys, traces, logs, recent IAM changes. Covers OOM, DNS, cascading-failure, deploy-correlator paths. |
-| `change-impact-analyzer` | *In progress* | Pre-flight checks: IAM blast radius, drift detection, what this PR breaks. |
-| `oncall-handover` | *In progress* | Reviews cert expiry, deploy state, SLO burn during oncall handover. |
-| `postmortem-author` | *In progress* | Timeline reconstruction, contributing factors, impact quantification. |
-| `reliability-auditor` | *In progress* | Production-readiness audit. |
+Each skill targets one real product and one job over it: audit an IAM policy, triage a Terraform plan, resolve an S3 bucket's effective access. It does that job end-to-end, offline, against fixtures. Not a wrapper that dumps the API response back: each one carries the judgment a senior engineer applies to that one source, the thresholds and known-bad combinations that separate signal from a clean-looking config.
 
-Start with [`incident-investigator`](./skills/incident-investigator/): it is the shipped reference template and shows the shape every other skill follows.
+Then it stops. A single source only knows itself. The moment a question needs a *join* (this role to everything it can actually reach, this queue to its producers and consumers, this plan to the running infrastructure it will move) the data runs out. Each skill names exactly where that happens and what's missing, so the boundary is explicit instead of a silent wrong answer. That boundary is the same one every time: the join across resources, across sources, or across time.
+
+| Skill | Domain | What it does |
+|---|---|---|
+| `sqs-queue-auditor` | AWS | Audits redrive/DLQ wiring, `maxReceiveCount`, retention ordering against the DLQ, and a visibility timeout left at the risky default: the queue-side config that silently drops or re-delivers messages while every attribute reads as fine. |
+| `iam-policy-auditor` | AWS | Expands wildcards to concrete permissions and flags known privilege-escalation combos (`PassRole`+`RunInstances`, `CreatePolicyVersion`, `UpdateFunctionCode`+`PassRole`) that no single statement looks guilty of. |
+| `security-group-exposure-auditor` | AWS | Collapses overlapping and redundant rules into the effective allow-set, flags wide CIDRs and egress-to-anywhere, and surfaces SG-to-SG references as the lateral-movement primitive a per-rule read misses. |
+| `s3-access-auditor` | AWS | Resolves *effective* public and cross-account access across Block Public Access, bucket policy, ACL, and access points: the four interacting layers that are each read wrong one at a time. |
+| `terraform-plan-risk-reporter` | IaC | Ranks plan changes by blast risk, isolating destroys and force-replacements of stateful or irreplaceable resources from the harmless in-place updates they hide among. |
+| `github-actions-flake-reporter` | CI/CD | Detects flaky jobs (pass-on-rerun on an unchanged SHA), clusters failures by cause, and flags duration regressions across run history, not just the last red run. |
+
+All *planned*. [`incident-investigator`](./skills/incident-investigator/) stays as the shipped reference template: it shows the directory shape, the worked-example format, and the fixture-based replay tests every skill above will follow.
 
 ## Using a skill
 
