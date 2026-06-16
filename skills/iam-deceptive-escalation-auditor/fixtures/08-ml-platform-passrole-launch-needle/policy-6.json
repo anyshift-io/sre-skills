@@ -1,0 +1,24 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "RunTrainingAndProcessingJobs",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:CreateTrainingJob",
+        "sagemaker:CreateProcessingJob",
+        "sagemaker:StopTrainingJob"
+      ],
+      "Resource": "arn:aws:sagemaker:eu-west-1:488213749302:training-job/*"
+    },
+    {
+      "Sid": "WriteJobOutputs",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:AbortMultipartUpload"
+      ],
+      "Resource": "arn:aws:s3:::ml-training-artifacts-eu/*"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Instances": [
+    {"InstanceId": "i-02lb00a01", "PublicIpAddress": "198.51.100.21", "SecurityGroups": [{"GroupId": "sg-02lb00000000000001"}], "Tags": [{"Key": "Name", "Value": "alb-a"}, {"Key": "tier", "Value": "lb"}]},
+    {"InstanceId": "i-02web0001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-02web00000000000002"}], "Tags": [{"Key": "Name", "Value": "web-1"}, {"Key": "tier", "Value": "web"}]},
+    {"InstanceId": "i-02app0001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-02app00000000000003"}], "Tags": [{"Key": "Name", "Value": "app-1"}, {"Key": "tier", "Value": "app"}]},
+    {"InstanceId": "i-02svc0001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-02svc00000000000004"}], "Tags": [{"Key": "Name", "Value": "svc-1"}, {"Key": "tier", "Value": "svc"}]},
+    {"InstanceId": "i-02db00001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-02db00000000000005"}], "Tags": [{"Key": "Name", "Value": "db-primary"}, {"Key": "tier", "Value": "db"}]},
+    {"InstanceId": "i-02bast001", "PublicIpAddress": "198.51.100.29", "SecurityGroups": [{"GroupId": "sg-02bastion000000006"}], "Tags": [{"Key": "Name", "Value": "bastion-1"}, {"Key": "tier", "Value": "bastion"}]}
+  ]
+}

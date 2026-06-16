@@ -1,0 +1,22 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ManageBreakGlassRoleInlinePolicies",
+      "Effect": "Allow",
+      "Action": [
+        "iam:PutRolePolicy",
+        "iam:AttachRolePolicy",
+        "iam:CreatePolicyVersion",
+        "iam:SetDefaultPolicyVersion",
+        "iam:UpdateAssumeRolePolicy",
+        "iam:PassRole",
+        "iam:CreateAccessKey"
+      ],
+      "Resource": [
+        "arn:aws:iam::488213749302:role/break-glass-admin",
+        "arn:aws:iam::488213749302:policy/break-glass-admin-policy"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "SecurityGroups": [
+    {
+      "GroupId": "sg-03lb00000000000001",
+      "GroupName": "public-alb",
+      "VpcId": "vpc-0islands1",
+      "Description": "Public application load balancer, HTTPS from internet",
+      "Tags": [{"Key": "tier", "Value": "lb"}, {"Key": "az", "Value": "us-west-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "0.0.0.0/0", "Description": "public HTTPS"}], "Ipv6Ranges": [{"CidrIpv6": "::/0"}], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03web00000000000002",
+      "GroupName": "web-frontend",
+      "VpcId": "vpc-0islands1",
+      "Description": "Public web frontend, accepts the ALB target subnet by CIDR on 8443",
+      "Tags": [{"Key": "tier", "Value": "web"}, {"Key": "az", "Value": "us-west-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8443, "ToPort": 8443, "IpRanges": [{"CidrIp": "10.60.10.0/24", "Description": "alb target subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03webapp0000000003",
+      "GroupName": "web-app",
+      "VpcId": "vpc-0islands1",
+      "Description": "Public-facing app tier, accepts the web subnet by CIDR on 8080",
+      "Tags": [{"Key": "tier", "Value": "web-app"}, {"Key": "az", "Value": "us-west-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8080, "ToPort": 8080, "IpRanges": [{"CidrIp": "10.60.20.0/24", "Description": "web subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03admin00000000004",
+      "GroupName": "admin-plane",
+      "VpcId": "vpc-0islands1",
+      "Description": "Internal admin plane, corp VPN CIDR only on 443",
+      "Tags": [{"Key": "tier", "Value": "admin"}, {"Key": "az", "Value": "us-west-2b"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "10.20.0.0/16", "Description": "corp VPN"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03dataproc00000005",
+      "GroupName": "data-processor",
+      "VpcId": "vpc-0islands1",
+      "Description": "Data processing tier, accepts the admin plane on 9443",
+      "Tags": [{"Key": "tier", "Value": "dataproc"}, {"Key": "az", "Value": "us-west-2b"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9443, "ToPort": 9443, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-03admin00000000004", "Description": "from admin plane"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03db00000000000006",
+      "GroupName": "db-primary",
+      "VpcId": "vpc-0islands1",
+      "Description": "Postgres primary, accepts the data processor on 5432",
+      "Tags": [{"Key": "tier", "Value": "db"}, {"Key": "az", "Value": "us-west-2b"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 5432, "ToPort": 5432, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-03dataproc00000005", "Description": "from data processor"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03cache00000000007",
+      "GroupName": "analytics-cache",
+      "VpcId": "vpc-0islands1",
+      "Description": "Analytics cache, accepts the data processor on 6379",
+      "Tags": [{"Key": "tier", "Value": "cache"}, {"Key": "az", "Value": "us-west-2b"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 6379, "ToPort": 6379, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-03dataproc00000005", "Description": "from data processor"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03bastion000000008",
+      "GroupName": "bastion",
+      "VpcId": "vpc-0islands1",
+      "Description": "SSH bastion, corp VPN only",
+      "Tags": [{"Key": "tier", "Value": "bastion"}, {"Key": "az", "Value": "us-west-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "IpRanges": [{"CidrIp": "10.20.0.0/16", "Description": "corp VPN"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03mon0000000000009",
+      "GroupName": "monitoring",
+      "VpcId": "vpc-0islands1",
+      "Description": "Prometheus, monitoring subnet only",
+      "Tags": [{"Key": "tier", "Value": "monitoring"}, {"Key": "az", "Value": "us-west-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9090, "ToPort": 9090, "IpRanges": [{"CidrIp": "10.80.1.0/24", "Description": "monitoring subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03ci00000000000010",
+      "GroupName": "ci-runner",
+      "VpcId": "vpc-0islands1",
+      "Description": "CI runners, runner subnet only",
+      "Tags": [{"Key": "tier", "Value": "ci"}, {"Key": "az", "Value": "us-west-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "10.80.7.0/24", "Description": "runner subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-03ssm0000000000011",
+      "GroupName": "ssm-endpoints",
+      "VpcId": "vpc-0islands1",
+      "Description": "SSM interface endpoints, internal CIDR only",
+      "Tags": [{"Key": "tier", "Value": "ssm"}, {"Key": "az", "Value": "us-west-2b"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "10.0.0.0/8"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    }
+  ]
+}

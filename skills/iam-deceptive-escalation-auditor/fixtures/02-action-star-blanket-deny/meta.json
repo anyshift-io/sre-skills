@@ -1,0 +1,4 @@
+{
+  "principal": "role/sandbox-experimenter",
+  "note": "Action '*' reads like AdministratorAccess, but it is pinned to a single sandbox S3 bucket (never Resource '*'), and a Deny on every escalation-bearing service (iam, sts, kms, lambda, ec2:RunInstances, ssm, secretsmanager) on Resource '*' overrides the star for anything dangerous. The wildcard expands to nothing useful outside one scratch bucket."
+}

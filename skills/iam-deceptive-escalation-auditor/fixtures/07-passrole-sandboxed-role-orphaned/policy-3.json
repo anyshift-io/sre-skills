@@ -1,0 +1,24 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "SandboxReadonlyComputeRoleOwnPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket",
+        "logs:GetLogEvents",
+        "logs:DescribeLogStreams",
+        "cloudwatch:GetMetricData",
+        "dynamodb:GetItem",
+        "dynamodb:Query"
+      ],
+      "Resource": [
+        "arn:aws:s3:::sandbox-fixtures-eu",
+        "arn:aws:s3:::sandbox-fixtures-eu/*",
+        "arn:aws:logs:eu-west-1:488213749302:log-group:/sandbox/*",
+        "arn:aws:dynamodb:eu-west-1:488213749302:table/sandbox-readonly-cache"
+      ]
+    }
+  ]
+}

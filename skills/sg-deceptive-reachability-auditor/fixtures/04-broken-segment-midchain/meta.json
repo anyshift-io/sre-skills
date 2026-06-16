@@ -1,0 +1,5 @@
+{
+  "entry": "internet",
+  "crown_jewel": "db",
+  "context": "Production fleet, 10 security groups. A long service chain is visible (public edge proxy to web to app to session cache to db). The public edge proxy carries the only 0.0.0.0/0 ingress, but the chain is cut at the first internal hop: the web frontend accepts only the internal mesh CIDR, not the edge proxy SG, so the edge-to-web link is not an SG edge and the rest of the chain (web to app to cache to db) is orphaned from the internet. The crown jewel is the database tier."
+}

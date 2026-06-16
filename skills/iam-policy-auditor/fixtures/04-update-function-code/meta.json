@@ -1,4 +1,0 @@
-{
-  "principal": "role/lambda-deployer",
-  "note": "A deployment role allowed to push code to any function in the account. The PassRole grant is scoped to the lambda-exec role path."
-}

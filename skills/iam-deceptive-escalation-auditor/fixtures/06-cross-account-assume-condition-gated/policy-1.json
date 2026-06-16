@@ -1,0 +1,29 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AssumeVendorAuditRoleCrossAccount",
+      "Effect": "Allow",
+      "Action": "sts:AssumeRole",
+      "Resource": "arn:aws:iam::905512347781:role/external-cost-auditor",
+      "Condition": {
+        "StringEquals": {
+          "sts:ExternalId": "vendor-cost-auditor-prod"
+        },
+        "StringEquals_PrincipalOrgID": {
+          "aws:PrincipalOrgID": "o-9f3kxample"
+        }
+      }
+    },
+    {
+      "Sid": "ReadCostAndUsageData",
+      "Effect": "Allow",
+      "Action": [
+        "ce:GetCostAndUsage",
+        "ce:GetCostForecast",
+        "cur:DescribeReportDefinitions"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "entry": "internet",
+  "crown_jewel": "db",
+  "context": "Production fleet, 11 security groups. A deep service chain (web to app to session cache to db) is wired with SG references, but the web frontend accepts only the internal service-mesh CIDR, not the public ALB security group, so the chain is orphaned from the internet entry. The crown jewel is the database tier."
+}

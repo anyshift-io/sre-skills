@@ -1,0 +1,10 @@
+{
+  "Instances": [
+    {"InstanceId": "i-07ingr01", "PublicIpAddress": "198.51.100.71", "SecurityGroups": [{"GroupId": "sg-07ingress00000001"}], "Tags": [{"Key": "Name", "Value": "ingress-1"}, {"Key": "tier", "Value": "ingress"}]},
+    {"InstanceId": "i-07mesh01", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-07mesh00000000002"}], "Tags": [{"Key": "Name", "Value": "mesh-1"}, {"Key": "tier", "Value": "mesh"}]},
+    {"InstanceId": "i-07app01", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-07app00000000003"}], "Tags": [{"Key": "Name", "Value": "app-1"}, {"Key": "tier", "Value": "app"}]},
+    {"InstanceId": "i-07brkr01", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-07broker0000000004"}], "Tags": [{"Key": "Name", "Value": "broker-1"}, {"Key": "tier", "Value": "broker"}]},
+    {"InstanceId": "i-07db001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-07db00000000000005"}], "Tags": [{"Key": "Name", "Value": "db-primary"}, {"Key": "tier", "Value": "db"}]},
+    {"InstanceId": "i-07bast01", "PublicIpAddress": "198.51.100.79", "SecurityGroups": [{"GroupId": "sg-07bastion0000006"}], "Tags": [{"Key": "Name", "Value": "bastion-1"}, {"Key": "tier", "Value": "bastion"}]}
+  ]
+}

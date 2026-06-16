@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "FullControlOfSandboxBucketOnly",
+      "Effect": "Allow",
+      "Action": "*",
+      "Resource": [
+        "arn:aws:s3:::team-sandbox-scratch",
+        "arn:aws:s3:::team-sandbox-scratch/*"
+      ]
+    },
+    {
+      "Sid": "DenyEscalationServicesEverywhere",
+      "Effect": "Deny",
+      "Action": [
+        "iam:*",
+        "sts:*",
+        "organizations:*",
+        "kms:*",
+        "lambda:*",
+        "ec2:RunInstances",
+        "ecs:RunTask",
+        "ssm:*",
+        "secretsmanager:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

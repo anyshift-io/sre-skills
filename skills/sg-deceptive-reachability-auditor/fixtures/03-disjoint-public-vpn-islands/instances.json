@@ -1,0 +1,11 @@
+{
+  "Instances": [
+    {"InstanceId": "i-03lb00a01", "PublicIpAddress": "192.0.2.31", "SecurityGroups": [{"GroupId": "sg-03lb00000000000001"}], "Tags": [{"Key": "Name", "Value": "alb-a"}, {"Key": "tier", "Value": "lb"}]},
+    {"InstanceId": "i-03web0001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-03web00000000000002"}], "Tags": [{"Key": "Name", "Value": "web-1"}, {"Key": "tier", "Value": "web"}]},
+    {"InstanceId": "i-03wapp001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-03webapp0000000003"}], "Tags": [{"Key": "Name", "Value": "web-app-1"}, {"Key": "tier", "Value": "web-app"}]},
+    {"InstanceId": "i-03admin01", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-03admin00000000004"}], "Tags": [{"Key": "Name", "Value": "admin-1"}, {"Key": "tier", "Value": "admin"}]},
+    {"InstanceId": "i-03dproc01", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-03dataproc00000005"}], "Tags": [{"Key": "Name", "Value": "dataproc-1"}, {"Key": "tier", "Value": "dataproc"}]},
+    {"InstanceId": "i-03db00001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-03db00000000000006"}], "Tags": [{"Key": "Name", "Value": "db-primary"}, {"Key": "tier", "Value": "db"}]},
+    {"InstanceId": "i-03bast001", "PublicIpAddress": "192.0.2.39", "SecurityGroups": [{"GroupId": "sg-03bastion000000008"}], "Tags": [{"Key": "Name", "Value": "bastion-1"}, {"Key": "tier", "Value": "bastion"}]}
+  ]
+}

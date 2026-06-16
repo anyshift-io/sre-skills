@@ -1,4 +1,0 @@
-{
-  "principal": "role/batch-submitter",
-  "note": "PassRole is scoped to one role and pinned to EC2 with a PassedToService condition, and a permissions boundary is attached. The escalation depends entirely on what role/batch-worker can do, which is not in this document."
-}
