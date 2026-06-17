@@ -1,0 +1,19 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AnyPrincipalButOnlyFromOurOrgWithExternalId",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "aws:PrincipalOrgID": "o-9f3kxample",
+          "sts:ExternalId": "vendor-cost-auditor-prod"
+        }
+      }
+    }
+  ]
+}

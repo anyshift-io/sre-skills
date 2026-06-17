@@ -1,4 +1,0 @@
-{
-  "principal": "role/partner-data-reader",
-  "note": "The permissions policy is correctly scoped to one bucket. The trust policy, written for a partner integration, was left open to any principal with no ExternalId or org condition."
-}

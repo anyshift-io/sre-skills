@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OnlyBreakGlassAdminsCanAssume",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::488213749302:role/security-break-glass-operator",
+          "arn:aws:iam::488213749302:role/incident-commander"
+        ]
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "sts:ExternalId": "breakglass-2026"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "SecurityGroups": [
+    {
+      "GroupId": "sg-04edge00000000000002",
+      "GroupName": "edge-proxy",
+      "VpcId": "vpc-0broken01",
+      "Description": "Public edge reverse proxy, HTTPS from internet",
+      "Tags": [{"Key": "tier", "Value": "edge"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "0.0.0.0/0", "Description": "public HTTPS"}], "Ipv6Ranges": [{"CidrIpv6": "::/0"}], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04web00000000000003",
+      "GroupName": "web-frontend",
+      "VpcId": "vpc-0broken01",
+      "Description": "Web frontend, accepts the internal mesh CIDR on 8080 (NOT the edge proxy SG: traffic from the public edge proxy is NAT'd onto the mesh subnet so registration is by CIDR)",
+      "Tags": [{"Key": "tier", "Value": "web"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8080, "ToPort": 8080, "IpRanges": [{"CidrIp": "10.70.0.0/16", "Description": "internal mesh"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04app00000000000004",
+      "GroupName": "app-tier",
+      "VpcId": "vpc-0broken01",
+      "Description": "Application tier, accepts the web frontend on 9000",
+      "Tags": [{"Key": "tier", "Value": "app"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9000, "ToPort": 9000, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-04web00000000000003", "Description": "from web"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04cache0000000000005",
+      "GroupName": "session-cache",
+      "VpcId": "vpc-0broken01",
+      "Description": "Redis session cache, accepts the app tier on 6379",
+      "Tags": [{"Key": "tier", "Value": "cache"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 6379, "ToPort": 6379, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-04app00000000000004", "Description": "from app"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04db00000000000006",
+      "GroupName": "db-primary",
+      "VpcId": "vpc-0broken01",
+      "Description": "Postgres primary, accepts the session cache on 5432",
+      "Tags": [{"Key": "tier", "Value": "db"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 5432, "ToPort": 5432, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-04cache0000000000005", "Description": "from session cache"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04bastion000000007",
+      "GroupName": "bastion",
+      "VpcId": "vpc-0broken01",
+      "Description": "SSH bastion, corp VPN only",
+      "Tags": [{"Key": "tier", "Value": "bastion"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "IpRanges": [{"CidrIp": "10.20.0.0/16", "Description": "corp VPN"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04mon0000000000008",
+      "GroupName": "monitoring",
+      "VpcId": "vpc-0broken01",
+      "Description": "Prometheus, monitoring subnet only",
+      "Tags": [{"Key": "tier", "Value": "monitoring"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9090, "ToPort": 9090, "IpRanges": [{"CidrIp": "10.80.1.0/24", "Description": "monitoring subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04ci00000000000009",
+      "GroupName": "ci-runner",
+      "VpcId": "vpc-0broken01",
+      "Description": "CI runners, runner subnet only",
+      "Tags": [{"Key": "tier", "Value": "ci"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "10.80.7.0/24", "Description": "runner subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04queue00000000010",
+      "GroupName": "rabbitmq",
+      "VpcId": "vpc-0broken01",
+      "Description": "RabbitMQ, accepts the app tier on 5672",
+      "Tags": [{"Key": "tier", "Value": "queue"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 5672, "ToPort": 5672, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-04app00000000000004", "Description": "from app"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-04logs000000000011",
+      "GroupName": "log-aggregator",
+      "VpcId": "vpc-0broken01",
+      "Description": "Log aggregator, accepts app + web on 5044",
+      "Tags": [{"Key": "tier", "Value": "logs"}, {"Key": "az", "Value": "eu-central-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 5044, "ToPort": 5044, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-04app00000000000004"}, {"GroupId": "sg-04web00000000000003"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    }
+  ]
+}

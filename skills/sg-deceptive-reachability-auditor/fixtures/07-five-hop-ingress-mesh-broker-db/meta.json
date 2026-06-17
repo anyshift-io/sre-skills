@@ -1,0 +1,5 @@
+{
+  "entry": "internet",
+  "crown_jewel": "db",
+  "context": "Production fleet, 12 security groups. A five-hop service chain (ingress controller to mesh sidecar to app to event broker to db) is wired entirely with ordinary single-upstream SG references, surrounded by scoped tiers (bastion, monitoring, ci, ssm) and app-fed leaves (cache, queue, logs). The crown jewel is the database tier."
+}

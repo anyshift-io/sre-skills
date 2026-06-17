@@ -1,0 +1,147 @@
+{
+  "SecurityGroups": [
+    {
+      "GroupId": "sg-05cdn00000000000001",
+      "GroupName": "cdn-origin",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "CDN origin edge, HTTPS from internet",
+      "Tags": [{"Key": "tier", "Value": "cdn"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "0.0.0.0/0", "Description": "public HTTPS"}], "Ipv6Ranges": [{"CidrIpv6": "::/0"}], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05waf00000000000002",
+      "GroupName": "waf-tier",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "WAF inspection tier, accepts the CDN origin on 8443",
+      "Tags": [{"Key": "tier", "Value": "waf"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8443, "ToPort": 8443, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-05cdn00000000000001", "Description": "from cdn origin"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05gw00000000000003",
+      "GroupName": "api-gateway",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "API gateway, accepts the WAF tier on 8080",
+      "Tags": [{"Key": "tier", "Value": "gw"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8080, "ToPort": 8080, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-05waf00000000000002", "Description": "from waf"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05app00000000000004",
+      "GroupName": "app-tier",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "Application tier, accepts the API gateway on 9000",
+      "Tags": [{"Key": "tier", "Value": "app"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9000, "ToPort": 9000, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-05gw00000000000003", "Description": "from api gateway"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05svc00000000000005",
+      "GroupName": "billing-service",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "Billing microservice, accepts the app tier on 7000",
+      "Tags": [{"Key": "tier", "Value": "svc"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 7000, "ToPort": 7000, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-05app00000000000004", "Description": "from app"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05db00000000000006",
+      "GroupName": "db-primary",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "Postgres primary, accepts the billing service on 5432 (settlement writer)",
+      "Tags": [{"Key": "tier", "Value": "db"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 5432, "ToPort": 5432, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-05svc00000000000005", "Description": "from billing service settlement writer"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05bastion000000007",
+      "GroupName": "bastion",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "SSH bastion, corp VPN only",
+      "Tags": [{"Key": "tier", "Value": "bastion"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "IpRanges": [{"CidrIp": "10.20.0.0/16", "Description": "corp VPN"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05mon0000000000008",
+      "GroupName": "monitoring",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "Prometheus, monitoring subnet only",
+      "Tags": [{"Key": "tier", "Value": "monitoring"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9090, "ToPort": 9090, "IpRanges": [{"CidrIp": "10.80.1.0/24", "Description": "monitoring subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05ci00000000000009",
+      "GroupName": "ci-runner",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "CI runners, runner subnet only",
+      "Tags": [{"Key": "tier", "Value": "ci"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "10.80.7.0/24", "Description": "runner subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05cache00000000010",
+      "GroupName": "redis-cache",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "Redis cache, accepts the app tier on 6379",
+      "Tags": [{"Key": "tier", "Value": "cache"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 6379, "ToPort": 6379, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-05app00000000000004", "Description": "from app"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05queue00000000011",
+      "GroupName": "kafka",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "Kafka brokers, accepts the app tier on 9092",
+      "Tags": [{"Key": "tier", "Value": "queue"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9092, "ToPort": 9092, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-05app00000000000004", "Description": "from app"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05ssm0000000000012",
+      "GroupName": "ssm-endpoints",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "SSM interface endpoints, internal CIDR only",
+      "Tags": [{"Key": "tier", "Value": "ssm"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "10.0.0.0/8"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-05logs000000000013",
+      "GroupName": "log-aggregator",
+      "VpcId": "vpc-0sixhop01",
+      "Description": "Log aggregator, accepts app + svc on 5044",
+      "Tags": [{"Key": "tier", "Value": "logs"}, {"Key": "az", "Value": "us-east-1a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 5044, "ToPort": 5044, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-05app00000000000004"}, {"GroupId": "sg-05svc00000000000005"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    }
+  ]
+}

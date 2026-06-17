@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PassSandboxComputeRole",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::488213749302:role/sandbox-readonly-compute"
+    },
+    {
+      "Sid": "ValidatePassableRole",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetRole",
+        "iam:ListRolePolicies",
+        "iam:ListAttachedRolePolicies"
+      ],
+      "Resource": "arn:aws:iam::488213749302:role/sandbox-readonly-compute"
+    }
+  ]
+}

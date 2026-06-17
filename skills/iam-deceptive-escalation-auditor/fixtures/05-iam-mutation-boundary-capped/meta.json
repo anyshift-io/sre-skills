@@ -1,0 +1,4 @@
+{
+  "principal": "role/identity-platform-operator",
+  "note": "policy-1 reads like a full identity-takeover kit: PutRolePolicy, AttachRolePolicy, CreatePolicyVersion, SetDefaultPolicyVersion, UpdateAssumeRolePolicy, PassRole and CreateAccessKey, every E2/E4/E5/E6 primitive in one place. But all of them are scoped to a single break-glass role/policy ARN (never Resource '*', so no W4), and policy-2 carries a permission-boundary-style explicit Deny on every one of those mutation/credential/assume actions across Resource '*'. An explicit Deny wins over any Allow, so the effective permission set collapses to read-only IAM inventory. The escalation kit is fully capped: no E-combo can fire."
+}

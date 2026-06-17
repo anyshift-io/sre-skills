@@ -1,0 +1,5 @@
+{
+  "entry": "internet",
+  "crown_jewel": "db",
+  "context": "Production fleet, 11 security groups. A public ALB carries the only 0.0.0.0/0 and ::/0 ingress on 443/80. A deep service chain (web to app to internal services to db) is wired downstream with SG references, but nothing references the public ALB security group: it forwards to its target group by registered IP, so no SG-to-SG edge composes from the internet into the fleet. The crown jewel is the database tier."
+}

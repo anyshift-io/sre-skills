@@ -1,0 +1,28 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DescribeTrainingInfra",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:DescribeTrainingJob",
+        "sagemaker:ListTrainingJobs",
+        "sagemaker:DescribeModel",
+        "sagemaker:ListModels",
+        "sagemaker:DescribeEndpoint",
+        "sagemaker:ListEndpoints"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ReadTrainingLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:GetLogEvents",
+        "logs:FilterLogEvents",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": "arn:aws:logs:eu-west-1:488213749302:log-group:/aws/sagemaker/*"
+    }
+  ]
+}
