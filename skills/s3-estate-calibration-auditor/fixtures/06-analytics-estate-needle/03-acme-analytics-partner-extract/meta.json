@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-analytics-partner-extract",
+  "note": "Principal '*' narrowed by sts:ExternalId -> scoped, not public."
+}

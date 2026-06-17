@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-thumbnails",
+  "note": "AllUsers READ ACL but IgnorePublicAcls=true -> grant is ignored, not live."
+}

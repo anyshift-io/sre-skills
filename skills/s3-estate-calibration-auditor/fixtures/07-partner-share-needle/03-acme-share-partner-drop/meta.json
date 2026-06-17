@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-share-partner-drop",
+  "note": "NEEDLE. ACL grants READ to a canonical user that is NOT the owner (a different account). IgnorePublicAcls neutralises only the public GROUPS, not a cross-account canonical-user grant -> LIVE. The TLS-only Deny does not address it. Looks like the ignored public ACLs but is a named other identity."
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "media-delivery-ap",
+    "PublicAccessBlock": {
+      "BlockPublicAcls": true,
+      "IgnorePublicAcls": true,
+      "BlockPublicPolicy": true,
+      "RestrictPublicBuckets": true
+    },
+    "Policy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "APDelegate",
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": [
+            "s3:GetObject"
+          ],
+          "Resource": [
+            "arn:aws:s3:us-east-1:111122223333:accesspoint/media-delivery-ap/object/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "s3:DataAccessPointAccount": "111122223333"
+            }
+          }
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-share-config",
+  "note": "Principal '*' GetObject but RestrictPublicBuckets=true -> neutralised."
+}

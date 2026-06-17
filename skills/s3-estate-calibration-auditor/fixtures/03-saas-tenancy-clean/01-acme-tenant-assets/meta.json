@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-tenant-assets",
+  "note": "Principal '*' narrowed by aws:PrincipalOrgID -> org-scoped, not public."
+}

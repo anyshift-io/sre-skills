@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-log-cloudfront",
+  "note": "AllUsers READ ACL but IgnorePublicAcls=true -> ignored, not live."
+}

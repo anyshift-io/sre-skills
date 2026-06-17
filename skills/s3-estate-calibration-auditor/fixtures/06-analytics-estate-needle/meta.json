@@ -1,0 +1,5 @@
+{
+  "estate": "analytics-estate",
+  "kind": "single-needle",
+  "note": "10-bucket analytics estate. Several buckets use Principal '*' narrowed by a Condition (org / external id), which are scoped and fine. Exactly one unassuming bucket has a Principal '*' GetObject with NO condition and BPA NOT restricting -> LIVE public. The needle hides among the conditional lookalikes; the difference is a missing Condition block."
+}

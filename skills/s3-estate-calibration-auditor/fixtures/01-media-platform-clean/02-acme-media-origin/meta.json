@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-origin",
+  "note": "Principal '*' GetObject but RestrictPublicBuckets=true -> neutralised, not live."
+}

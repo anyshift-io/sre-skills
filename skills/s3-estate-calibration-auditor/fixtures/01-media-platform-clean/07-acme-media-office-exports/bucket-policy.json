@@ -1,0 +1,24 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OfficeIPRead",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::acme-media-office-exports/*"
+      ],
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": [
+            "203.0.113.0/24",
+            "198.51.100.0/24"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-lake-quarantine",
+  "note": "AllUsers READ ACL but IgnorePublicAcls=true -> ignored, not live."
+}

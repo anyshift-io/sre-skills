@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-analytics-staging",
+  "note": "Principal '*' GetObject but RestrictPublicBuckets=true -> neutralised, not live."
+}

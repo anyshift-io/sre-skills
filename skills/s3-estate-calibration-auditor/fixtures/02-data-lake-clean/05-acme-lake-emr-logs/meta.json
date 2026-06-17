@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-lake-emr-logs",
+  "note": "TLS-only Deny only. Clean."
+}

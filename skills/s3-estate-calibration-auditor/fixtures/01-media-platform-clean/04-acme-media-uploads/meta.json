@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-uploads",
+  "note": "Owner-only ACL, no policy, BPA all on. Clean private."
+}

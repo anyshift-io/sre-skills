@@ -1,0 +1,5 @@
+{
+  "estate": "logging-estate",
+  "kind": "single-needle",
+  "note": "11-bucket logging estate. Exactly one bucket has a LIVE cross-account bucket policy (a named other account, NOT public, NOT blocked by BPA-all-on). Everything else is clean or neutralised. The needle is quiet: an unassuming log-shipping bucket with BPA all on (which reads as locked down) that still grants a partner account read."
+}

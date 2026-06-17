@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-share-press-kit",
+  "note": "AllUsers READ ACL but IgnorePublicAcls=true -> ignored, not live."
+}

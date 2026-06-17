@@ -1,0 +1,5 @@
+{
+  "estate": "saas-tenancy",
+  "kind": "deceptive-clean",
+  "note": "9-bucket multi-tenant SaaS estate. Several tenant-shared buckets use Principal '*' narrowed by org id / external id, and one public ACL is ignored by BPA. No live exposure. Trap: reading Principal '*' and stopping."
+}

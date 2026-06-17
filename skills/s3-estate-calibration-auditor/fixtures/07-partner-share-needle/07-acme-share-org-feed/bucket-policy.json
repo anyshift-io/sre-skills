@@ -1,0 +1,22 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OrgRead",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::acme-share-org-feed",
+        "arn:aws:s3:::acme-share-org-feed/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:PrincipalOrgID": "o-7x3k9m2qab"
+        }
+      }
+    }
+  ]
+}

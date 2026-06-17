@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-office-exports",
+  "note": "Principal '*' narrowed by aws:SourceIp office allowlist -> IP-scoped, not public."
+}

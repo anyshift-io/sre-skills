@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-lake-athena-results",
+  "note": "Principal '*' GetObject but RestrictPublicBuckets=true -> neutralised, not live."
+}

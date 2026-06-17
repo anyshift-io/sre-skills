@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-tenant-billing",
+  "note": "TLS-only Deny only. Clean."
+}
