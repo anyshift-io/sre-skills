@@ -1,0 +1,5 @@
+{
+  "entry": "internet",
+  "crown_jewel": "db",
+  "context": "Production fleet, 13 security groups. A six-hop service chain (CDN origin to WAF to API gateway to app to billing service to db) is wired entirely with ordinary single-upstream SG references, surrounded by scoped tiers (bastion, monitoring, ci, ssm) and app-fed leaves (cache, queue, logs). The crown jewel is the database tier."
+}

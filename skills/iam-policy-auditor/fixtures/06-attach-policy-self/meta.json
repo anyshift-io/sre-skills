@@ -1,4 +1,0 @@
-{
-  "principal": "role/service-onboarding",
-  "note": "A role that provisions new service roles. AttachRolePolicy is scoped to the service role path, but nothing stops it attaching AdministratorAccess to a role it then assumes."
-}

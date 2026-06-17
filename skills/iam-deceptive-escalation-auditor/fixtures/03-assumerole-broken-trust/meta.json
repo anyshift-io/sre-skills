@@ -1,0 +1,4 @@
+{
+  "principal": "role/deploy-orchestrator",
+  "note": "The permissions policy grants sts:AssumeRole on role/org-admin-break-glass, which sounds like a lateral move into an admin role. But the target role's trust policy only trusts security-break-glass-operator and incident-commander, behind an ExternalId: it does not trust this principal back. The AssumeRole grant is inert, there is no actual path, and this principal has no iam:UpdateAssumeRolePolicy to fix the trust. No escalation."
+}

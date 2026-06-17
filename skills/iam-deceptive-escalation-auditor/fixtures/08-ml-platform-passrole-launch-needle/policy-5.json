@@ -1,0 +1,36 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ManageNotebookLifecycleConfigsReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:DescribeNotebookInstance",
+        "sagemaker:ListNotebookInstances",
+        "sagemaker:DescribeNotebookInstanceLifecycleConfig",
+        "sagemaker:ListNotebookInstanceLifecycleConfigs"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "WriteExperimentTracking",
+      "Effect": "Allow",
+      "Action": [
+        "sagemaker:CreateExperiment",
+        "sagemaker:CreateTrial",
+        "sagemaker:CreateTrialComponent",
+        "sagemaker:AddTags"
+      ],
+      "Resource": "arn:aws:sagemaker:eu-west-1:488213749302:experiment/*"
+    },
+    {
+      "Sid": "ReadKmsForArtifactDecryption",
+      "Effect": "Allow",
+      "Action": [
+        "kms:DescribeKey",
+        "kms:ListAliases"
+      ],
+      "Resource": "arn:aws:kms:eu-west-1:488213749302:key/ml-artifacts-key"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "entry": "i-06ci0001",
+  "crown_jewel": "db",
+  "context": "Production fleet, 12 security groups. The entry point is a COMPROMISED CI runner host (instance i-06ci0001), not the internet. From that foothold a deep build-pipeline chain composes (CI runner to build coordinator to artifact store to deploy agent to app to db). A separate public ALB to web to web-cache front door exists but never references the data plane. The crown jewel is the database tier."
+}

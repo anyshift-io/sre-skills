@@ -1,0 +1,4 @@
+{
+  "principal": "role/cost-reporting-collector",
+  "note": "sts:AssumeRole on a role in a DIFFERENT account (905512347781) reads like a cross-account pivot into a foreign account. But the AssumeRole Allow is gated by an sts:ExternalId + aws:PrincipalOrgID Condition this principal cannot satisfy (it is not in org o-9f3kxample and holds no ExternalId), and the target role's own trust policy (supplied) only trusts callers that present BOTH the org id and the ExternalId, so the wildcard Principal is fully narrowed and X1 does not fire. The principal has no iam:UpdateAssumeRolePolicy to relax either side. The pivot looks open but is condition-sealed at both ends: no real path, no escalation."
+}

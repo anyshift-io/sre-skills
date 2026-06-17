@@ -1,0 +1,136 @@
+{
+  "SecurityGroups": [
+    {
+      "GroupId": "sg-06ci00000000000001",
+      "GroupName": "ci-runner",
+      "VpcId": "vpc-0cirun01",
+      "Description": "CI runners, runner subnet only",
+      "Tags": [{"Key": "tier", "Value": "ci"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "10.80.7.0/24", "Description": "runner subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06build0000000002",
+      "GroupName": "build-coordinator",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Build coordinator, accepts the CI runners on 8500",
+      "Tags": [{"Key": "tier", "Value": "build"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8500, "ToPort": 8500, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-06ci00000000000001", "Description": "from ci runners"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06artifact000003",
+      "GroupName": "artifact-store",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Artifact store, accepts the build coordinator on 8081",
+      "Tags": [{"Key": "tier", "Value": "artifact"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8081, "ToPort": 8081, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-06build0000000002", "Description": "from build coordinator"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06deploy00000004",
+      "GroupName": "deploy-agent",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Deploy agent, accepts the artifact store on 8090 (pulls signed artifacts then pushes to app)",
+      "Tags": [{"Key": "tier", "Value": "deploy"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8090, "ToPort": 8090, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-06artifact000003", "Description": "from artifact store"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06app00000000005",
+      "GroupName": "app-tier",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Application tier, accepts the deploy agent on 9000 (rolling deploy push)",
+      "Tags": [{"Key": "tier", "Value": "app"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9000, "ToPort": 9000, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-06deploy00000004", "Description": "from deploy agent"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06db00000000000006",
+      "GroupName": "db-primary",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Postgres primary, accepts the app tier on 5432",
+      "Tags": [{"Key": "tier", "Value": "db"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 5432, "ToPort": 5432, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-06app00000000005", "Description": "from app"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06lb00000000000007",
+      "GroupName": "public-alb",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Public application load balancer, HTTPS from internet (separate public front door)",
+      "Tags": [{"Key": "tier", "Value": "lb"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "0.0.0.0/0", "Description": "public HTTPS"}], "Ipv6Ranges": [{"CidrIpv6": "::/0"}], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06web00000000000008",
+      "GroupName": "web-frontend",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Public web frontend, accepts the public ALB on 8443",
+      "Tags": [{"Key": "tier", "Value": "web"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 8443, "ToPort": 8443, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-06lb00000000000007", "Description": "from public alb"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06cache00000000009",
+      "GroupName": "web-cache",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Web edge cache, accepts the web frontend on 6379 (public front door only, no data-plane reference)",
+      "Tags": [{"Key": "tier", "Value": "cache"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 6379, "ToPort": 6379, "IpRanges": [], "Ipv6Ranges": [], "UserIdGroupPairs": [{"GroupId": "sg-06web00000000000008", "Description": "from web"}]}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06bastion0000010",
+      "GroupName": "bastion",
+      "VpcId": "vpc-0cirun01",
+      "Description": "SSH bastion, corp VPN only",
+      "Tags": [{"Key": "tier", "Value": "bastion"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 22, "ToPort": 22, "IpRanges": [{"CidrIp": "10.20.0.0/16", "Description": "corp VPN"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06mon00000000011",
+      "GroupName": "monitoring",
+      "VpcId": "vpc-0cirun01",
+      "Description": "Prometheus, monitoring subnet only",
+      "Tags": [{"Key": "tier", "Value": "monitoring"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 9090, "ToPort": 9090, "IpRanges": [{"CidrIp": "10.80.1.0/24", "Description": "monitoring subnet"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    },
+    {
+      "GroupId": "sg-06ssm00000000012",
+      "GroupName": "ssm-endpoints",
+      "VpcId": "vpc-0cirun01",
+      "Description": "SSM interface endpoints, internal CIDR only",
+      "Tags": [{"Key": "tier", "Value": "ssm"}, {"Key": "az", "Value": "us-east-2a"}],
+      "IpPermissions": [
+        {"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "10.0.0.0/8"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}
+      ],
+      "IpPermissionsEgress": [{"IpProtocol": "-1", "IpRanges": [{"CidrIp": "0.0.0.0/0"}], "Ipv6Ranges": [], "UserIdGroupPairs": []}]
+    }
+  ]
+}

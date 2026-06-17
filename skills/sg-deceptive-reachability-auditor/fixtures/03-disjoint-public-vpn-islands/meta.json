@@ -1,0 +1,5 @@
+{
+  "entry": "internet",
+  "crown_jewel": "db",
+  "context": "Production fleet, 11 security groups in two AZs forming two disconnected islands. The internet-facing island (public ALB to web to web-app) is wired by CIDR, not SG references, and dead-ends. The data island carries a deep SG-reference chain (admin plane to data processor to db, plus an analytics cache), but the admin plane accepts only the corp VPN CIDR and has no inbound SG reference, so the data island is reachable only from the VPN, never from the internet. The crown jewel is the database tier."
+}

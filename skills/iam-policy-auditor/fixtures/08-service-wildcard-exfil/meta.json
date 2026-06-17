@@ -1,4 +1,0 @@
-{
-  "principal": "role/reporting-exporter",
-  "note": "A reporting job that needs to read a couple of secrets and a few buckets, granted with two service-shaped wildcards instead of named resources."
-}

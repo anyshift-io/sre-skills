@@ -1,0 +1,4 @@
+{
+  "principal": "role/build-fleet-runner",
+  "note": "Looks like the classic PassRole + RunInstances escalation: both actions are present. But an explicit Deny on iam:PassRole (Resource '*') overrides the scoped Allow, and the role it would have passed is a retired instance profile. The PassRole half is dead; there is no real escalation path."
+}

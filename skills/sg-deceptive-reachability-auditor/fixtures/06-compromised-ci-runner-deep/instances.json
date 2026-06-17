@@ -1,0 +1,12 @@
+{
+  "Instances": [
+    {"InstanceId": "i-06ci0001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-06ci00000000000001"}], "Tags": [{"Key": "Name", "Value": "ci-runner-1"}, {"Key": "tier", "Value": "ci"}]},
+    {"InstanceId": "i-06build01", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-06build0000000002"}], "Tags": [{"Key": "Name", "Value": "build-1"}, {"Key": "tier", "Value": "build"}]},
+    {"InstanceId": "i-06artif01", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-06artifact000003"}], "Tags": [{"Key": "Name", "Value": "artifact-1"}, {"Key": "tier", "Value": "artifact"}]},
+    {"InstanceId": "i-06deploy1", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-06deploy00000004"}], "Tags": [{"Key": "Name", "Value": "deploy-1"}, {"Key": "tier", "Value": "deploy"}]},
+    {"InstanceId": "i-06app001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-06app00000000005"}], "Tags": [{"Key": "Name", "Value": "app-1"}, {"Key": "tier", "Value": "app"}]},
+    {"InstanceId": "i-06db0001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-06db00000000000006"}], "Tags": [{"Key": "Name", "Value": "db-primary"}, {"Key": "tier", "Value": "db"}]},
+    {"InstanceId": "i-06lb0001", "PublicIpAddress": "203.0.113.61", "SecurityGroups": [{"GroupId": "sg-06lb00000000000007"}], "Tags": [{"Key": "Name", "Value": "alb-1"}, {"Key": "tier", "Value": "lb"}]},
+    {"InstanceId": "i-06web001", "PublicIpAddress": null, "SecurityGroups": [{"GroupId": "sg-06web00000000000008"}], "Tags": [{"Key": "Name", "Value": "web-1"}, {"Key": "tier", "Value": "web"}]}
+  ]
+}

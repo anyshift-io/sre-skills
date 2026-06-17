@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadFeatureStoreBuckets",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::ml-feature-store-eu",
+        "arn:aws:s3:::ml-feature-store-eu/*",
+        "arn:aws:s3:::ml-training-artifacts-eu",
+        "arn:aws:s3:::ml-training-artifacts-eu/*"
+      ]
+    },
+    {
+      "Sid": "ReadTrainingMetadata",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:Query",
+        "dynamodb:BatchGetItem"
+      ],
+      "Resource": "arn:aws:dynamodb:eu-west-1:488213749302:table/training-runs"
+    }
+  ]
+}

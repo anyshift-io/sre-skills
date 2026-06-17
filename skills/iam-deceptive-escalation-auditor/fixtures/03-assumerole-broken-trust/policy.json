@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AssumeDeployTargetRole",
+      "Effect": "Allow",
+      "Action": "sts:AssumeRole",
+      "Resource": "arn:aws:iam::488213749302:role/org-admin-break-glass"
+    },
+    {
+      "Sid": "ReadDeployConfig",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::deploy-config-eu",
+        "arn:aws:s3:::deploy-config-eu/*"
+      ]
+    }
+  ]
+}
