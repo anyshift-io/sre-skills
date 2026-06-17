@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-backup-snapshots",
+  "note": "Principal '*' GetObject but RestrictPublicBuckets=true -> neutralised."
+}

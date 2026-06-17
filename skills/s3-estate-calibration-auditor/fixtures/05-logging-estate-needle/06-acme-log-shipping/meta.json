@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-log-shipping",
+  "note": "NEEDLE. BPA all on (reads locked down) but the policy grants a named other account (905638217741) read. Cross-account is NOT public, so BPA does not block it -> LIVE."
+}

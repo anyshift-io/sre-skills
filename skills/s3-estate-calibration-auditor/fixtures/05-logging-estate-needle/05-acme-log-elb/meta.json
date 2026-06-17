@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-log-elb",
+  "note": "Principal '*' GetObject but RestrictPublicBuckets=true -> neutralised, not live."
+}

@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-share-public-mirror",
+  "note": "AllUsers READ ACL but IgnorePublicAcls=true -> ignored, not live."
+}

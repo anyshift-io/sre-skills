@@ -1,0 +1,5 @@
+{
+  "estate": "data-lake",
+  "kind": "deceptive-clean",
+  "note": "11-bucket data lake. Multiple buckets carry public-looking policies and a public ACL, all neutralised by BPA or scoped by Conditions (org path, external id). No live exposure. Trap: over-flagging the neutralised lake buckets."
+}

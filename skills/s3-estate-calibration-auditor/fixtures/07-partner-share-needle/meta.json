@@ -1,0 +1,5 @@
+{
+  "estate": "partner-share",
+  "kind": "single-needle",
+  "note": "9-bucket partner-sharing estate. Several buckets carry an AllUsers public ACL grant that is IGNORED by IgnorePublicAcls (not live). Exactly one bucket grants READ to a different account's CANONICAL USER via ACL -- IgnorePublicAcls only neutralises the public GROUPS, so a cross-account canonical-user grant stays LIVE even with BPA tightened. The needle is a single ACL grant that looks like the ignored public ones but is a named other identity."
+}

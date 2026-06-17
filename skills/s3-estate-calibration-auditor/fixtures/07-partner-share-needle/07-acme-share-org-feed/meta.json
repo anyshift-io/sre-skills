@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-share-org-feed",
+  "note": "Principal '*' narrowed by aws:PrincipalOrgID -> org-scoped, not public."
+}

@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-analytics-clickstream",
+  "note": "NEEDLE. Principal '*' GetObject with NO Condition, and BPA does not restrict (RestrictPublicBuckets + BlockPublicPolicy both off) -> LIVE public. Looks like the conditional siblings but is missing the Condition block."
+}

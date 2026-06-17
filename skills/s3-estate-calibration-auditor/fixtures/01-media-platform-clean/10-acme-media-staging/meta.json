@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-staging",
+  "note": "Clean private staging (BPA restrict on, owner-only)."
+}

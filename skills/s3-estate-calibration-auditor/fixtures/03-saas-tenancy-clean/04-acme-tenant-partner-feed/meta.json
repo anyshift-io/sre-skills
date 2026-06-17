@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-tenant-partner-feed",
+  "note": "Principal '*' narrowed by sts:ExternalId -> scoped, not public."
+}

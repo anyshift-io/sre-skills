@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-analytics-events-org",
+  "note": "Principal '*' narrowed by aws:PrincipalOrgID -> org-scoped, not public."
+}

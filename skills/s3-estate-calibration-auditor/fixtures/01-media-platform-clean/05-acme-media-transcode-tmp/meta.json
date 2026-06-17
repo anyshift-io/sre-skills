@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-transcode-tmp",
+  "note": "Clean private working bucket."
+}

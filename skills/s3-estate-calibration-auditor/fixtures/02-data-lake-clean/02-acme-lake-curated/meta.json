@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-lake-curated",
+  "note": "Principal '*' narrowed by aws:PrincipalOrgPaths -> OU-scoped, not public."
+}

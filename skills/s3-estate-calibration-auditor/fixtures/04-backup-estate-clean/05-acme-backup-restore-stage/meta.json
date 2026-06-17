@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-backup-restore-stage",
+  "note": "AllUsers READ ACL but IgnorePublicAcls=true -> ignored, not live."
+}

@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-tenant-exports",
+  "note": "AllUsers READ ACL but IgnorePublicAcls=true -> ignored, not live."
+}

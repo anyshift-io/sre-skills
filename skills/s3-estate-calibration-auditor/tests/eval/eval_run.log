@@ -1,0 +1,13 @@
+CONTROL-ONLY screening: 7 fixtures x 3 trials = 21 agent calls
+Agent model: claude-sonnet-4-6, Judge model: claude-sonnet-4-6 (generic prompt, no treatment arm, no SKILL.md)
+
+  01-media-platform-clean        | trial 0 | score 3/7 | review 81s
+  01-media-platform-clean        | trial 1 | score 4/7 | review 82s
+  01-media-platform-clean        | trial 2 | score 4/7 | review 76s
+  02-data-lake-clean             | trial 0 | score 3/7 | review 69s
+CONTROL-ONLY screening: 7 fixtures x 3 trials = 21 agent calls
+Agent model: claude-sonnet-4-6, Judge model: claude-sonnet-4-6 (generic prompt, no treatment arm, no SKILL.md)
+
+Resuming from skills/s3-estate-calibration-auditor/tests/eval/eval_results.json: 4 trials already complete; filling gaps only.
+
+  02-data-lake-clean             | trial 1 | score 3/7 | review 72s

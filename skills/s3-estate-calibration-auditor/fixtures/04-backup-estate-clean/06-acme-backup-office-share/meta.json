@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-backup-office-share",
+  "note": "Principal '*' narrowed by aws:SourceIp -> IP-scoped, not public."
+}

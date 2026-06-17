@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-delivery-ap",
+  "note": "Bucket clean; access point delegates to a named account (s3 AP delegation), not public."
+}

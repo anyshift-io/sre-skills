@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-shared-config",
+  "note": "Principal '*' narrowed by aws:PrincipalOrgID -> org-scoped, not public."
+}

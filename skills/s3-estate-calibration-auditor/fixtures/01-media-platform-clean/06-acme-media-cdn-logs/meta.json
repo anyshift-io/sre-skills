@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-media-cdn-logs",
+  "note": "Only a TLS-only Deny; a Deny grants nothing. Clean."
+}

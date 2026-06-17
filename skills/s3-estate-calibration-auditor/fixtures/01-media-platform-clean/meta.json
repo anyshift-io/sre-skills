@@ -1,0 +1,5 @@
+{
+  "estate": "media-platform",
+  "kind": "deceptive-clean",
+  "note": "10-bucket media platform. Several buckets READ as exposed (public ACL grant, public-looking policy, Principal '*' policies) but every one is neutralised by BPA or scoped by a Condition. The engine reports NO live exposure. The trap is flagging the neutralised/scoped lookalikes as live public buckets."
+}

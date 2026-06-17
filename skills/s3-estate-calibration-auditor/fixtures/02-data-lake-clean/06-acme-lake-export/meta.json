@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-lake-export",
+  "note": "Principal '*' narrowed by sts:ExternalId -> scoped sharing, not public."
+}

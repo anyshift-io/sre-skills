@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-log-cloudtrail",
+  "note": "TLS-only Deny only. Clean."
+}

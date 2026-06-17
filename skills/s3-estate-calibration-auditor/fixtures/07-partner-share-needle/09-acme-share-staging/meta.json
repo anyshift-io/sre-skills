@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-share-staging",
+  "note": "AllUsers READ ACL but IgnorePublicAcls=true -> ignored, not live."
+}

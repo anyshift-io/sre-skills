@@ -1,0 +1,5 @@
+{
+  "estate": "backup-estate",
+  "kind": "deceptive-clean",
+  "note": "10-bucket backup/DR estate. A few buckets carry public-looking policies and a public ACL grant, all neutralised by BPA; one Principal '*' is IP-scoped. No live exposure. Trap: over-flagging the neutralised backup buckets."
+}

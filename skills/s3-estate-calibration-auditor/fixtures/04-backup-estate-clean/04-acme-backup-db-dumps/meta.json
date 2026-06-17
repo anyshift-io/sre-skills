@@ -1,0 +1,4 @@
+{
+  "bucket": "acme-backup-db-dumps",
+  "note": "TLS-only Deny only. Clean."
+}

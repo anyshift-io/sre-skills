@@ -1,0 +1,25 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OrgPathRead",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::acme-lake-curated",
+        "arn:aws:s3:::acme-lake-curated/*"
+      ],
+      "Condition": {
+        "ForAnyValue:StringLike": {
+          "aws:PrincipalOrgPaths": [
+            "o-7x3k9m2qab/r-root/ou-data/*"
+          ]
+        }
+      }
+    }
+  ]
+}
