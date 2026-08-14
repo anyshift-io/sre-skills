@@ -7,8 +7,7 @@
 # Keep it in sync with custom_github_actions/.github/workflows/slack-pr-reviewer-notify.yml.
 #
 # The pull_request trigger (not pull_request_target) means fork PRs run without
-# secrets, so the NOTIFIER_* secrets are never exposed to untrusted code; on a
-# fork PR the script simply finds an empty token and exits 0 without notifying.
+# secrets; OIDC assume fails with continue-on-error and the script exits 0.
 name: PR Review Notifications
 
 on:
@@ -17,16 +16,24 @@ on:
 
 permissions:
   contents: read
-
-env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.NOTIFIER_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.NOTIFIER_SECRET_ACCESS_KEY }}
+  id-token: write
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     name: PR Review Slack Notify
+    permissions:
+      contents: read
+      id-token: write
     steps:
+      - name: Configure AWS credentials (OIDC)
+        id: aws
+        continue-on-error: true
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c # v6
+        with:
+          role-to-assume: ${{ secrets.NOTIFIER_AWS_OIDC_ROLE_ARN }}
+          aws-region: us-east-1
+
       - name: Send slack notifications to requested reviewers
         env:
           NOTIFIER_SLACK_BOT_TOKEN: ${{ secrets.NOTIFIER_SLACK_BOT_TOKEN }}
