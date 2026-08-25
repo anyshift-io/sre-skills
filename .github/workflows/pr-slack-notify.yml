@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   notify:
-    runs-on: ${{ vars.USE_GITHUB_HOSTED == 'true' && 'ubuntu-latest' || fromJSON('["self-hosted","linux","x64","docker"]') }}
+    runs-on: ubuntu-latest
     name: PR Review Slack Notify
     permissions:
       contents: read
