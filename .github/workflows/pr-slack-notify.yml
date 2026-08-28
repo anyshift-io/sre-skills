@@ -4,7 +4,8 @@
 # custom_github_actions repo (GitHub blocks public -> private Actions access
 # regardless of the private repo's access policy), so pr-slack-notify.yml
 # startup-fails on public repos. This file inlines the same logic instead.
-# Keep it in sync with custom_github_actions/.github/workflows/slack-pr-reviewer-notify.yml.
+# Keep it in sync with custom_github_actions/.github/workflows/slack-pr-reviewer-notify.yml
+# for notification logic only — not for runs-on (see below).
 #
 # The pull_request trigger (not pull_request_target) means fork PRs run without
 # secrets; OIDC assume fails with continue-on-error and the script exits 0.
@@ -20,7 +21,11 @@ permissions:
 
 jobs:
   notify:
-    runs-on: ${{ vars.USE_GITHUB_HOSTED == 'true' && 'ubuntu-latest' || fromJSON('["self-hosted","linux","x64","docker"]') }}
+    # Public repos must use GitHub-hosted runners. The org Self-Hosted runner
+    # group sets allows_public_repositories=false, so jobs labeled
+    # self-hosted/linux/x64/docker stay queued forever and never get picked up.
+    # Do not reintroduce USE_GITHUB_HOSTED or self-hosted labels here.
+    runs-on: ubuntu-latest
     name: PR Review Slack Notify
     permissions:
       contents: read
