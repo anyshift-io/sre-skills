@@ -41,6 +41,7 @@ jobs:
 
       - name: Send slack notifications to requested reviewers
         env:
+          AWS_OIDC_OUTCOME: ${{ steps.aws.outcome }}
           NOTIFIER_SLACK_BOT_TOKEN: ${{ secrets.NOTIFIER_SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: "C0B1FJTN6M8"
           AWS_REGION: "us-east-1"
@@ -48,7 +49,12 @@ jobs:
           S3_OBJECT_KEY: "github_to_slack_mapper.json"
         run: |
           #!/bin/bash
-          # Always exit successfully to avoid failing PRs
+          # Always exit successfully to avoid failing PRs, but make every
+          # silent skip visible as an annotation and a job-summary line.
+          warn() {
+            echo "::warning title=PR Slack notify::$1"
+            echo "- :warning: PR Slack notify: $1" >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
+          }
 
           # GitHub event data
           GITHUB_EVENT_PATH="${GITHUB_EVENT_PATH}"
@@ -61,9 +67,13 @@ jobs:
           S3_BUCKET="${S3_BUCKET:-as-github-slack-mapping}"
           S3_OBJECT_KEY="${S3_OBJECT_KEY:-github_to_slack_mapper.json}"
 
+          if [ "$AWS_OIDC_OUTCOME" = "failure" ]; then
+            warn "AWS OIDC role assumption failed (NOTIFIER_AWS_OIDC_ROLE_ARN unset, or the role does not trust this repo)"
+          fi
+
           # Check required env vars
           if [ -z "$SLACK_BOT_TOKEN" ]; then
-            echo "Warning: NOTIFIER_SLACK_BOT_TOKEN is not set - skipping notification"
+            warn "NOTIFIER_SLACK_BOT_TOKEN is not set - skipping notification"
             exit 0
           fi
 
@@ -76,7 +86,7 @@ jobs:
           echo "Downloading GitHub to Slack mapping..."
           MAPPING_FILE="/tmp/github_slack_mapping.json"
           if ! aws s3 cp "s3://${S3_BUCKET}/${S3_OBJECT_KEY}" "$MAPPING_FILE" --region "$AWS_REGION" 2>/dev/null; then
-            echo "Warning: Failed to download S3 mapping file - skipping notification"
+            warn "Failed to download S3 mapping file - skipping notification"
             exit 0
           fi
 
@@ -139,7 +149,7 @@ jobs:
           OK=$(echo "$RESPONSE" | jq -r '.ok')
           if [ "$OK" != "true" ]; then
             ERROR=$(echo "$RESPONSE" | jq -r '.error // "Unknown error"')
-            echo "Warning: Failed to send Slack message: $ERROR"
+            warn "Failed to send Slack message: $ERROR"
             exit 0
           fi
 
